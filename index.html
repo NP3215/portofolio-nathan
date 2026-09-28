@@ -1,929 +1,1184 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nathan — Portfolio</title>
-<meta name="description" content="Portfolio of Nathan — software developer projects and skills.">
+<title>Nathan Phan — Portfolio</title>
+<meta name="description" content="Nathan Phan is a Computer Science student and developer building full-stack web apps and API integrations. Projects, work experience and CV.">
+<meta name="theme-color" content="#0f1420">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Nathan Phan — Portfolio">
+<meta property="og:description" content="Full-stack web apps and API integrations by Nathan Phan, a Computer Science student at BINUS University.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%235b7cfa'/%3E%3Ctext x='16' y='23' font-size='20' font-family='Arial,sans-serif' font-weight='700' text-anchor='middle' fill='%230b0f1a'%3EN%3C/text%3E%3C/svg%3E">
+
+<!-- Apply the saved (or system) theme before first paint so there is no flash -->
+<script>
+(function () {
+  var t;
+  try { t = localStorage.getItem("theme"); } catch (e) {}
+  if (t !== "light" && t !== "dark") {
+    t = (window.matchMedia && matchMedia("(prefers-color-scheme: light)").matches) ? "light" : "dark";
+  }
+  document.documentElement.setAttribute("data-theme", t);
+})();
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
 
 <style>
-:root {
-  --ink: #12151c;
-  --ink-soft: #1a1f29;
-  --ink-line: #2a303c;
-  --paper: #edeae1;
-  --paper-line: #d8d3c6;
-  --text-hi: #f3f1ea;
-  --text-lo: #a3aab6;
-  --text-ink: #23242a;
-  --signal: #5b7cfa;
-  --signal-dim: #33396b;
-  --tag: #e8a548;
-  --tag-dim: #4a3b20;
-  --font-display: "Space Grotesk", "Arial Narrow", sans-serif;
-  --font-body: "Inter", -apple-system, "Segoe UI", sans-serif;
-  --maxw: 1120px;
-  --gutter: clamp(20px, 5vw, 64px);
-  --radius: 6px;
-  --nav-h: 68px;
+/* ===========================================================
+   Tokens
+   =========================================================== */
+:root, :root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0f1420;
+  --surface: #161d2c;
+  --surface-2: #1d2638;
+  --line: #262f47;
+  --line-2: #364160;
+  --text: #eceff6;
+  --text-2: #a9b2c6;
+  --text-3: #7f8aa4;
+  --blue: #8aa0ff;
+  --blue-strong: #5b7cfa;
+  --blue-tint: #1c2653;
+  --amber: #f0ac4f;
+  --amber-tint: #3a2d16;
+  --btn-bg: #6b8aff;
+  --btn-text: #0a0e18;
+  --overlay: rgba(15, 20, 32, 0.86);
 }
-* { box-sizing: border-box; }
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: #f3f5fa;
+  --surface: #ffffff;
+  --surface-2: #e8ecf6;
+  --line: #d8deec;
+  --line-2: #bcc5da;
+  --text: #131a2b;
+  --text-2: #444f6a;
+  --text-3: #5e6984;
+  --blue: #2e49cf;
+  --blue-strong: #3350d8;
+  --blue-tint: #e2e8ff;
+  --amber: #a55d05;
+  --amber-tint: #fbebd0;
+  --btn-bg: #2e49cf;
+  --btn-text: #ffffff;
+  --overlay: rgba(243, 245, 250, 0.9);
+}
+:root {
+  --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --font-body: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --gutter: clamp(20px, 5vw, 56px);
+  --rail-w: 272px;
+}
+
+/* ===========================================================
+   Base
+   =========================================================== */
+*, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
   margin: 0;
-  background: var(--ink);
-  color: var(--text-lo);
+  background: var(--bg);
+  color: var(--text-2);
   font-family: var(--font-body);
-  font-size: 16px;
-  line-height: 1.6;
+  font-size: 1rem;
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 img { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
-ul { margin: 0; padding: 0; list-style: none; }
-h1, h2, h3, h4 { font-family: var(--font-display); color: var(--text-hi); margin: 0; font-weight: 600; }
 p { margin: 0; }
-:focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; }
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
-  html { scroll-behavior: auto; }
+ul, ol { margin: 0; padding: 0; list-style: none; }
+h1, h2, h3, h4 {
+  margin: 0;
+  color: var(--text);
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.15;
 }
-.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--gutter); }
 [hidden] { display: none !important; }
-.page > section,
-.page > header { scroll-margin-top: calc(var(--nav-h) + 16px); }
-.site-nav {
-  position: sticky; top: 0; z-index: 50;
-  background: rgba(18, 21, 28, 0.88);
-  backdrop-filter: blur(8px);
-  border-bottom: 1px solid var(--ink-line);
+:focus-visible { outline: 2px solid var(--blue-strong); outline-offset: 3px; border-radius: 4px; }
+.ic { width: 18px; height: 18px; flex: none; }
+.ic-stroke { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.ic-fill { fill: currentColor; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition-duration: 0.001ms !important; animation-duration: 0.001ms !important; }
 }
-.site-nav .wrap { display: flex; align-items: center; justify-content: space-between; height: var(--nav-h); }
-.brand { font-family: var(--font-display); font-size: 1.05rem; color: var(--text-hi); letter-spacing: -0.01em; }
-.brand span { color: var(--signal); }
-.nav-links { display: flex; align-items: center; gap: 28px; }
-.nav-links a { font-size: 0.92rem; color: var(--text-lo); transition: color 0.15s ease; }
-.nav-links a:hover { color: var(--text-hi); }
-.nav-links .btn-github {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 8px 14px; border: 1px solid var(--ink-line); border-radius: var(--radius); color: var(--text-hi);
+
+/* ===========================================================
+   Shell: sticky rail + content
+   =========================================================== */
+.shell {
+  display: grid;
+  grid-template-columns: var(--rail-w) minmax(0, 1fr);
+  column-gap: clamp(48px, 7vw, 104px);
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
 }
-.nav-links .btn-github:hover { border-color: var(--signal); }
-.nav-toggle { display: none; background: none; border: none; color: var(--text-hi); font-size: 1.5rem; cursor: pointer; }
-@media (max-width: 720px) {
-  .nav-toggle { display: block; }
-  .nav-links {
-    position: absolute; top: var(--nav-h); left: 0; right: 0;
-    background: var(--ink-soft); border-bottom: 1px solid var(--ink-line);
-    flex-direction: column; align-items: flex-start; padding: 16px var(--gutter) 24px; gap: 16px; display: none;
+.rail {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  padding: 64px 0 36px;
+}
+.rail-name {
+  font-family: var(--font-display);
+  font-size: 2.35rem;
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  color: var(--text);
+}
+.rail-role { margin-top: 14px; font-size: 0.98rem; color: var(--text-2); max-width: 24ch; }
+.status {
+  margin-top: 18px;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 0.86rem;
+  color: var(--text-2);
+}
+.status i { width: 8px; height: 8px; border-radius: 50%; background: #45c48a; flex: none; }
+.rail-nav { margin-top: 44px; display: flex; flex-direction: column; gap: 4px; }
+.rail-nav a {
+  display: block;
+  padding: 6px 0 6px 14px;
+  border-left: 2px solid var(--line);
+  font-size: 0.95rem;
+  color: var(--text-3);
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.rail-nav a:hover { color: var(--text); }
+.rail-nav a.active { color: var(--text); border-left-color: var(--blue-strong); }
+.rail-foot { margin-top: auto; display: flex; align-items: center; gap: 6px; }
+.icon-link, .theme-toggle, .menu-toggle {
+  width: 38px; height: 38px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 8px;
+  color: var(--text-2);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+.icon-link:hover, .theme-toggle:hover, .menu-toggle:hover { color: var(--text); background: var(--surface-2); }
+.rail-foot .theme-toggle { margin-left: auto; }
+.theme-toggle .sun { display: none; }
+:root[data-theme="dark"] .theme-toggle .sun { display: block; }
+:root[data-theme="dark"] .theme-toggle .moon { display: none; }
+
+.content { padding: 64px 0 96px; min-width: 0; }
+
+/* Mobile top bar */
+.topbar { display: none; }
+@media (max-width: 960px) {
+  .shell { display: block; }
+  .rail { display: none; }
+  .content { padding: 28px 0 72px; }
+  .topbar {
+    display: block;
+    position: sticky; top: 0; z-index: 40;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
   }
-  .nav-links.open { display: flex; }
+  .topbar-row {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 60px; padding: 0 var(--gutter);
+  }
+  .topbar-name { font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; color: var(--text); letter-spacing: -0.02em; }
+  .topbar-actions { display: flex; gap: 4px; }
+  .mobile-menu { padding: 8px var(--gutter) 22px; border-top: 1px solid var(--line); background: var(--bg); }
+  .mobile-menu a.nav-item { display: block; padding: 11px 0; color: var(--text); font-size: 1.05rem; border-bottom: 1px solid var(--line); }
+  .mobile-menu .mm-icons { display: flex; gap: 6px; margin-top: 14px; }
 }
-.hero { padding: clamp(56px, 10vw, 120px) 0 clamp(48px, 8vw, 96px); border-bottom: 1px solid var(--ink-line); }
-.hero .wrap { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: clamp(32px, 5vw, 64px); align-items: center; }
-.eyebrow-role { font-size: 0.95rem; color: var(--signal); margin-bottom: 14px; }
-.hero h1 { font-size: clamp(2.1rem, 4.4vw, 3.4rem); line-height: 1.08; letter-spacing: -0.02em; max-width: 14ch; }
-.hero-lede { margin-top: 20px; max-width: 46ch; font-size: 1.08rem; color: var(--text-lo); }
-.hero-actions { margin-top: 32px; display: flex; gap: 14px; flex-wrap: wrap; }
+
+/* ===========================================================
+   Shared pieces
+   =========================================================== */
+.block { margin-top: clamp(72px, 10vw, 112px); scroll-margin-top: 84px; }
+.block-head h2 { font-size: clamp(1.7rem, 3.4vw, 2.2rem); letter-spacing: -0.02em; }
+.block-head p { margin-top: 12px; max-width: 58ch; }
+
 .btn {
-  display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; border-radius: var(--radius);
-  font-size: 0.95rem; font-weight: 500; transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 11px 18px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  font-family: var(--font-body);
+  font-size: 0.94rem; font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
 }
-.btn-primary { background: var(--signal); color: #0d0f14; }
+.btn-primary { background: var(--btn-bg); color: var(--btn-text); }
 .btn-primary:hover { transform: translateY(-1px); }
-.btn-outline { border: 1px solid var(--ink-line); color: var(--text-hi); }
-.btn-outline:hover { border-color: var(--text-lo); }
-.hero-art { display: flex; justify-content: center; }
-.hero-art svg { width: 100%; max-width: 380px; height: auto; }
-section { padding: clamp(56px, 9vw, 96px) 0; border-bottom: 1px solid var(--ink-line); }
-section:last-of-type { border-bottom: none; }
-.section-head { margin-bottom: 40px; max-width: 62ch; }
-.section-head h2 { font-size: clamp(1.6rem, 3vw, 2.1rem); letter-spacing: -0.015em; }
-.section-head p { margin-top: 12px; color: var(--text-lo); }
-.about-body { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
-.about-body p { color: var(--text-lo); }
-.about-body p + p { margin-top: 16px; }
-.about-facts { display: flex; flex-direction: column; gap: 18px; }
-.fact { border-left: 2px solid var(--ink-line); padding-left: 16px; }
-.fact dt { font-family: var(--font-display); color: var(--text-hi); font-size: 0.95rem; }
-.fact dd { margin: 4px 0 0; color: var(--text-lo); font-size: 0.92rem; }
-@media (max-width: 780px) {
-  .about-body, .hero .wrap { grid-template-columns: 1fr; }
-  .hero-art { order: -1; max-width: 220px; margin: 0 auto; }
+.btn-ghost { border-color: var(--line-2); color: var(--text); background: transparent; }
+.btn-ghost:hover { border-color: var(--text-3); }
+
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chips li {
+  font-size: 0.8rem;
+  padding: 3px 11px;
+  border: 1px solid var(--line-2);
+  border-radius: 999px;
+  color: var(--text-2);
 }
-.skill-groups { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
-.skill-group { border-top: 1px solid var(--ink-line); padding-top: 18px; }
-.skill-group h3 { font-size: 1rem; margin-bottom: 12px; }
-.skill-group ul { display: flex; flex-direction: column; gap: 8px; }
-.skill-group li { font-size: 0.92rem; color: var(--text-lo); display: flex; align-items: baseline; gap: 10px; }
-.skill-group li::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--ink-line); flex-shrink: 0; }
-@media (max-width: 780px) { .skill-groups { grid-template-columns: 1fr; } }
-.project-feature { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 5vw, 56px); align-items: center; padding: 36px 0; }
-.project-feature + .project-feature { border-top: 1px solid var(--ink-line); }
-.project-feature.reverse .feature-media { order: 2; }
-.feature-media { background: var(--paper); border-radius: var(--radius); overflow: hidden; border: 1px solid var(--paper-line); }
-.feature-media img { display: block; width: 100%; }
-.feature-tag { display: inline-block; font-size: 0.78rem; padding: 4px 10px; border-radius: 999px; margin-bottom: 14px; }
-.feature-tag.blue { background: var(--signal-dim); color: #c9d3ff; }
-.feature-tag.gold { background: var(--tag-dim); color: #f4d49b; }
-.project-feature h3 { font-size: 1.5rem; margin-bottom: 12px; }
-.project-feature p { color: var(--text-lo); max-width: 42ch; }
-.feature-link {
-  display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; color: var(--text-hi); font-size: 0.94rem;
-  border-bottom: 1px solid var(--ink-line); padding-bottom: 2px; transition: border-color 0.15s ease;
+.kind { display: inline-flex; align-items: center; gap: 8px; font-size: 0.85rem; color: var(--text-3); }
+.kind::before { content: ""; width: 8px; height: 8px; border-radius: 2px; background: var(--blue-strong); }
+.kind.amber::before { background: var(--amber); }
+
+.text-link {
+  color: var(--text);
+  border-bottom: 1px solid var(--line-2);
+  padding-bottom: 1px;
+  transition: border-color 0.15s ease, color 0.15s ease;
 }
-.feature-link:hover { border-color: var(--signal); }
-@media (max-width: 780px) {
-  .project-feature, .project-feature.reverse { grid-template-columns: 1fr; }
-  .project-feature.reverse .feature-media { order: 0; }
+.text-link:hover { border-color: var(--blue-strong); color: var(--blue); }
+
+.bullets { display: flex; flex-direction: column; gap: 12px; max-width: 66ch; }
+.bullets li { position: relative; padding-left: 22px; }
+.bullets li::before { content: ""; position: absolute; left: 0; top: 0.68em; width: 6px; height: 6px; background: var(--blue-strong); border-radius: 1px; }
+
+/* ===========================================================
+   Home: intro
+   =========================================================== */
+.intro { display: grid; grid-template-columns: minmax(0, 1fr) 190px; gap: 40px; align-items: start; }
+.statement {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 3.4vw, 2.35rem);
+  line-height: 1.2;
+  letter-spacing: -0.022em;
+  font-weight: 600;
+  color: var(--text);
+  max-width: 26ch;
 }
-footer { padding: 40px 0 56px; }
-footer .wrap { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 20px; }
-.footer-contact { font-size: 0.92rem; color: var(--text-lo); }
-.footer-contact a { color: var(--text-hi); }
-.footer-social { display: flex; gap: 16px; }
-.footer-note { margin-top: 24px; font-size: 0.8rem; color: #5f6673; }
-.project-hero { padding: 40px 0 48px; border-bottom: 1px solid var(--ink-line); }
-.back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 0.88rem; color: var(--text-lo); margin-bottom: 28px; }
-.back-link:hover { color: var(--text-hi); }
-.project-hero h1 { font-size: clamp(1.9rem, 4vw, 2.7rem); max-width: 16ch; }
-.project-tagline { margin-top: 14px; font-size: 1.05rem; color: var(--text-lo); max-width: 52ch; }
-.project-meta { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 28px; }
-.meta-item dt { font-size: 0.76rem; color: #6b7280; text-transform: lowercase; }
-.meta-item dd { margin: 4px 0 0; color: var(--text-hi); font-size: 0.92rem; }
-.detail-block { max-width: 68ch; }
-.detail-block p + p { margin-top: 14px; }
-.detail-block h2 { font-size: 1.3rem; margin-bottom: 16px; }
-.feature-list { display: flex; flex-direction: column; gap: 14px; max-width: 68ch; }
-.feature-list li { padding-left: 20px; position: relative; color: var(--text-lo); }
-.feature-list li::before { content: ""; position: absolute; left: 0; top: 9px; width: 6px; height: 6px; background: var(--signal); }
-.step-list { list-style: none; counter-reset: step; display: flex; flex-direction: column; gap: 18px; max-width: 68ch; }
-.step-list li { counter-increment: step; padding-left: 40px; position: relative; color: var(--text-lo); }
-.step-list li::before {
-  content: counter(step); position: absolute; left: 0; top: 0; width: 26px; height: 26px;
-  border: 1px solid var(--ink-line); border-radius: 50%; display: flex; align-items: center; justify-content: center;
-  font-family: var(--font-display); font-size: 0.78rem; color: var(--text-hi);
+.intro-sub { margin-top: 22px; max-width: 52ch; font-size: 1.04rem; }
+.intro-actions { margin-top: 30px; display: flex; flex-wrap: wrap; gap: 12px; }
+.motif { width: 100%; height: auto; }
+.m-line { fill: none; stroke: var(--blue); stroke-width: 2; }
+.m-tag { fill: none; stroke: var(--amber); stroke-width: 2; }
+.m-text { fill: var(--text-2); font-family: var(--font-body); font-size: 12px; }
+.m-dot { fill: var(--blue); }
+.m-dot-tag { fill: var(--amber); }
+@media (max-width: 720px) { .intro { grid-template-columns: 1fr; } .motif-wrap { display: none; } }
+
+/* ===========================================================
+   Home: projects
+   =========================================================== */
+.feature { position: relative; margin-top: 44px; }
+.feature + .feature { margin-top: 68px; }
+.feature-media {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--surface-2);
+  aspect-ratio: 16 / 9;
 }
-.shot-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-.shot { background: var(--paper); border: 1px solid var(--paper-line); border-radius: var(--radius); overflow: hidden; }
-.shot img { width: 100%; }
-.shot figcaption { padding: 12px 16px; font-size: 0.84rem; color: var(--text-ink); background: var(--paper); border-top: 1px solid var(--paper-line); }
+.feature-media img { width: 100%; height: 100%; object-fit: cover; object-position: top left; }
+.feature-body { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 14px 44px; margin-top: 22px; }
+.feature h3, .mini h3 { font-size: 1.45rem; margin: 8px 0 10px; letter-spacing: -0.02em; }
+.feature-side { display: flex; flex-direction: column; gap: 18px; }
+.feature-links { display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: 0.93rem; }
+.feature-links a { position: relative; z-index: 2; }
+.stretch::after { content: ""; position: absolute; inset: 0; z-index: 1; }
+.stretch:focus-visible { outline: none; }
+.stretch:focus-visible::after { outline: 2px solid var(--blue-strong); outline-offset: 8px; border-radius: 12px; }
+.feature:hover h3 .stretch, .mini:hover h3 .stretch { color: var(--blue); }
+@media (max-width: 720px) { .feature-body { grid-template-columns: 1fr; } }
+
+.more-label { margin-top: 84px; font-family: var(--font-display); font-size: 1.15rem; font-weight: 600; color: var(--text); }
+.mini-grid { margin-top: 26px; display: grid; grid-template-columns: 1fr 1fr; gap: 44px 32px; }
+.mini { position: relative; }
+.mini .feature-media { aspect-ratio: 16 / 10; }
+.mini h3 { font-size: 1.2rem; margin-top: 16px; }
+.mini p { font-size: 0.95rem; }
+.mini .chips { margin-top: 14px; }
+.mini .feature-links { margin-top: 14px; }
+@media (max-width: 720px) { .mini-grid { grid-template-columns: 1fr; } }
+
+/* ===========================================================
+   Home: experience timeline (chronological, so the line carries meaning)
+   =========================================================== */
+.timeline { margin-top: 34px; padding-left: 30px; position: relative; }
+.timeline::before { content: ""; position: absolute; left: 5px; top: 10px; bottom: 6px; width: 1px; background: var(--line-2); }
+.tl-item { position: relative; }
+.tl-item + .tl-item { margin-top: 48px; }
+.tl-item::before {
+  content: ""; position: absolute; left: -30px; top: 7px;
+  width: 11px; height: 11px; border-radius: 50%;
+  background: var(--bg); border: 2px solid var(--text-3);
+}
+.tl-item.current::before { background: var(--blue-strong); border-color: var(--blue-strong); }
+.tl-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 4px 24px; }
+.tl-head h3 { font-size: 1.2rem; }
+.tl-dates { font-size: 0.9rem; color: var(--text-3); }
+.tl-company { margin: 4px 0 16px; color: var(--text); font-weight: 500; }
+.tl-company small { margin-left: 8px; font-size: 0.8rem; font-weight: 400; color: var(--text-3); }
+
+/* ===========================================================
+   Home: about, skills, contact
+   =========================================================== */
+.about-grid { margin-top: 28px; display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 40px; }
+.about-grid p + p { margin-top: 16px; }
+.facts { display: flex; flex-direction: column; gap: 16px; margin: 0; }
+.fact { border-left: 2px solid var(--line-2); padding-left: 16px; }
+.fact dt { font-family: var(--font-display); font-weight: 600; color: var(--text); font-size: 0.95rem; }
+.fact dd { margin: 3px 0 0; font-size: 0.93rem; }
+@media (max-width: 720px) { .about-grid { grid-template-columns: 1fr; } }
+
+.skills-grid { margin-top: 34px; display: grid; grid-template-columns: 1fr 1fr; gap: 36px 44px; }
+.skill { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 16px; }
+.skill-icon {
+  width: 40px; height: 40px; border-radius: 9px;
+  background: var(--surface-2); color: var(--blue);
+  display: flex; align-items: center; justify-content: center;
+}
+.skill-icon .ic { width: 20px; height: 20px; }
+.skill h3 { font-size: 1.05rem; margin-bottom: 6px; }
+.skill p { font-size: 0.93rem; }
+@media (max-width: 720px) { .skills-grid { grid-template-columns: 1fr; } }
+
+.tools { margin-top: 56px; display: grid; gap: 22px; border-top: 1px solid var(--line); padding-top: 32px; }
+.tools-row { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 10px 18px; align-items: baseline; }
+.tools-row h3 { font-size: 0.98rem; }
+@media (max-width: 720px) { .tools-row { grid-template-columns: 1fr; } }
+
+.contact {
+  margin-top: clamp(72px, 10vw, 112px);
+  padding: clamp(28px, 5vw, 48px);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  scroll-margin-top: 84px;
+}
+.contact h2 { font-size: clamp(1.9rem, 4vw, 2.6rem); letter-spacing: -0.025em; }
+.contact p { margin-top: 14px; max-width: 48ch; }
+.contact-actions { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 12px; }
+.contact-links { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 8px 24px; font-size: 0.94rem; }
+.site-foot { margin-top: 40px; font-size: 0.82rem; color: var(--text-3); }
+
+/* ===========================================================
+   Case study pages
+   =========================================================== */
+.back { display: inline-flex; align-items: center; gap: 6px; font-size: 0.9rem; color: var(--text-3); margin-bottom: 30px; }
+.back:hover { color: var(--text); }
+.cs-head h1 { font-size: clamp(2.1rem, 4.8vw, 3.2rem); letter-spacing: -0.03em; max-width: 18ch; }
+.cs-tagline { margin-top: 16px; font-size: 1.1rem; max-width: 54ch; }
+.meta { margin: 28px 0 0; display: flex; flex-wrap: wrap; gap: 18px 40px; }
+.meta div { min-width: 0; }
+.meta dt { font-size: 0.8rem; color: var(--text-3); }
+.meta dd { margin: 3px 0 0; color: var(--text); font-size: 0.95rem; }
+.meta dd a { border-bottom: 1px solid var(--line-2); }
+.meta dd a:hover { border-color: var(--blue-strong); color: var(--blue); }
+.cs-actions { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 12px; }
+.cs-section { margin-top: 68px; }
+.cs-section h2 { font-size: 1.35rem; margin-bottom: 18px; letter-spacing: -0.015em; }
+.cs-section p { max-width: 66ch; }
+.cs-section p + p { margin-top: 14px; }
+.cs-lead { margin: 40px 0 0; }
+
+/* Flow diagram */
+.flow { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr); gap: 14px; align-items: center; }
+.flow-col { display: grid; gap: 10px; }
+.node {
+  border: 1px solid var(--line-2);
+  border-radius: 8px;
+  padding: 12px 14px;
+  background: var(--surface);
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+.node b { display: block; color: var(--text); font-family: var(--font-display); font-weight: 600; font-size: 0.95rem; margin-bottom: 2px; }
+.node.blue { border-color: var(--blue-strong); }
+.node.amber { border-color: var(--amber); }
+.flow-arrow { color: var(--text-3); width: 26px; height: 26px; }
+.flow-note { margin-top: 16px; font-size: 0.92rem; color: var(--text-3); max-width: 66ch; }
+@media (max-width: 720px) {
+  .flow { grid-template-columns: 1fr; }
+  .flow-arrow { transform: rotate(90deg); margin: 0 auto; }
+}
+
+/* Screenshots + lightbox */
+.gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.gallery.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.gallery.one { grid-template-columns: 1fr; }
+.shot { margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
 .shot.wide { grid-column: 1 / -1; }
-@media (max-width: 700px) { .shot-grid { grid-template-columns: 1fr; } }
-.stack-chips { display: flex; flex-wrap: wrap; gap: 10px; }
-.chip { font-size: 0.85rem; padding: 7px 13px; border: 1px solid var(--ink-line); border-radius: 999px; color: var(--text-hi); }
-.project-links { display: flex; gap: 14px; flex-wrap: wrap; }
-.next-project { display: flex; justify-content: space-between; align-items: center; padding: 28px 0; }
-.next-project .label { font-size: 0.8rem; color: #6b7280; }
-.next-project .title { font-family: var(--font-display); font-size: 1.15rem; color: var(--text-hi); margin-top: 4px; }
+.shot-btn { display: block; width: 100%; padding: 0; border: 0; background: var(--surface-2); cursor: zoom-in; }
+.shot-btn img { width: 100%; height: auto; }
+.shot figcaption { padding: 11px 14px; font-size: 0.85rem; color: var(--text-2); border-top: 1px solid var(--line); }
+@media (max-width: 720px) { .gallery, .gallery.three { grid-template-columns: 1fr; } }
+
+dialog.lightbox {
+  border: 0; padding: 0; background: transparent;
+  max-width: min(1200px, 94vw); max-height: 94vh; width: 100%;
+  color: var(--text); overflow: visible;
+}
+dialog.lightbox::backdrop { background: var(--overlay); backdrop-filter: blur(4px); }
+.lb-inner { position: relative; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.lb-inner img { max-width: 100%; max-height: 80vh; border-radius: 10px; border: 1px solid var(--line-2); background: var(--surface); }
+.lb-caption { font-size: 0.9rem; color: var(--text-2); text-align: center; }
+.lb-close {
+  position: absolute; top: -46px; right: 0;
+  width: 38px; height: 38px; border-radius: 8px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--surface); color: var(--text); border: 1px solid var(--line-2); cursor: pointer;
+}
+
+/* Steps (a real sequence) */
+.steps { counter-reset: step; display: flex; flex-direction: column; gap: 16px; max-width: 66ch; }
+.steps li { counter-increment: step; position: relative; padding-left: 44px; }
+.steps li::before {
+  content: counter(step);
+  position: absolute; left: 0; top: -1px;
+  width: 28px; height: 28px; border-radius: 50%;
+  border: 1px solid var(--line-2);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-size: 0.82rem; color: var(--text);
+}
+
+.next-project {
+  margin-top: 80px; padding-top: 28px; border-top: 1px solid var(--line);
+  display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap;
+}
+.next-project .label { font-size: 0.82rem; color: var(--text-3); }
+.next-project .title { margin-top: 2px; font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; color: var(--text); }
 </style>
 </head>
 <body>
 
-<nav class="site-nav">
-  <div class="wrap">
-    <a href="#home" class="brand">Nathan<span>.</span></a>
-    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
-    <div class="nav-links">
-      <a href="#about">About</a>
-      <a href="#skills">Skills</a>
-      <a href="#projects">Projects</a>
-      <a href="#contact">Contact</a>
-      <a class="btn-github" href="https://github.com/NP3215" target="_blank" rel="noopener">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.5 7.5 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
-        GitHub
-      </a>
+<!-- Icon sprite -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-github" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.5 7.5 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></symbol>
+  <symbol id="i-linkedin" viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.05c.53-1 1.83-2 3.77-2 4 0 4.78 2.6 4.78 6V21h-4v-5.1c0-1.2 0-2.8-1.7-2.8s-1.95 1.3-1.95 2.7V21h-4z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12M7 11l5 5 5-5M4 20h16"/></symbol>
+  <symbol id="i-code" viewBox="0 0 24 24"><polyline points="8 6 2 12 8 18"/><polyline points="16 6 22 12 16 18"/></symbol>
+  <symbol id="i-database" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></symbol>
+  <symbol id="i-layout" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 9v11"/></symbol>
+  <symbol id="i-plug" viewBox="0 0 24 24"><path d="M9 2v6M15 2v6M7 8h10v3a5 5 0 0 1-10 0V8zM12 16v6"/></symbol>
+  <symbol id="i-briefcase" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></symbol>
+  <symbol id="i-device" viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24"><path d="M20 12H5M11 6l-6 6 6 6"/></symbol>
+</svg>
+
+<!-- Mobile top bar (hidden on desktop, where the side rail is used) -->
+<header class="topbar">
+  <div class="topbar-row">
+    <a class="topbar-name" href="#top">Nathan Phan</a>
+    <div class="topbar-actions">
+      <button class="theme-toggle" type="button" aria-label="Switch colour theme">
+        <svg class="ic ic-stroke sun"><use href="#i-sun"/></svg>
+        <svg class="ic ic-stroke moon"><use href="#i-moon"/></svg>
+      </button>
+      <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+        <svg class="ic ic-stroke"><use href="#i-menu"/></svg>
+      </button>
     </div>
   </div>
-</nav>
+  <nav class="mobile-menu" id="mobile-menu" hidden>
+    <a class="nav-item" href="#projects">Projects</a>
+    <a class="nav-item" href="#experience">Experience</a>
+    <a class="nav-item" href="#about">About</a>
+    <a class="nav-item" href="#skills">Skills</a>
+    <a class="nav-item" href="#contact">Contact</a>
+    <div class="mm-icons">
+      <a class="icon-link" href="https://github.com/NP3215" target="_blank" rel="noopener" aria-label="GitHub"><svg class="ic ic-fill"><use href="#i-github"/></svg></a>
+      <a class="icon-link" href="https://www.linkedin.com/in/nathan-phan-218a88367/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg class="ic ic-fill"><use href="#i-linkedin"/></svg></a>
+      <a class="icon-link" href="mailto:nathanphan.nate@gmail.com" aria-label="Email"><svg class="ic ic-stroke"><use href="#i-mail"/></svg></a>
+    </div>
+  </nav>
+</header>
 
+<div class="shell">
 
-<div class="page" id="page-home" data-title="Nathan — Portfolio">
+  <!-- Desktop side rail -->
+  <aside class="rail">
+    <a class="rail-name" href="#top">Nathan<br>Phan</a>
+    <p class="rail-role">Computer Science student focusing on Software Engineering</p>
+    <p class="status"><i></i>Open to internships</p>
 
-<header class="hero">
-  <div class="wrap">
+    <nav class="rail-nav" aria-label="Sections">
+      <a href="#projects" data-target="projects">Projects</a>
+      <a href="#experience" data-target="experience">Experience</a>
+      <a href="#about" data-target="about">About</a>
+      <a href="#skills" data-target="skills">Skills</a>
+      <a href="#contact" data-target="contact">Contact</a>
+    </nav>
+
+    <div class="rail-foot">
+      <a class="icon-link" href="https://github.com/NP3215" target="_blank" rel="noopener" aria-label="GitHub"><svg class="ic ic-fill"><use href="#i-github"/></svg></a>
+      <a class="icon-link" href="https://www.linkedin.com/in/nathan-phan-218a88367/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg class="ic ic-fill"><use href="#i-linkedin"/></svg></a>
+      <a class="icon-link" href="mailto:nathanphan.nate@gmail.com" aria-label="Email"><svg class="ic ic-stroke"><use href="#i-mail"/></svg></a>
+      <button class="theme-toggle" type="button" aria-label="Switch colour theme">
+        <svg class="ic ic-stroke sun"><use href="#i-sun"/></svg>
+        <svg class="ic ic-stroke moon"><use href="#i-moon"/></svg>
+      </button>
+    </div>
+  </aside>
+
+  <main class="content">
+
+<!-- ===========================================================
+     PAGE: Home
+     =========================================================== -->
+<div class="page" id="page-home" data-title="Nathan Phan — Portfolio">
+
+  <section class="intro" id="top">
     <div>
-      <p class="eyebrow-role">Hi I'm</p>
-      <h1>Nathan Phan</h1>
-      <p class="hero-lede">
-        I'm based in Tangerang, Indonesia. Studying Computer Science in BINUS University @AlamSutera. I love to learn new things and I build products that solve real problems, like the InstaTags chrome extension and the WhatsApp WeChat messaging bridge.
-      </p>
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="#projects">View my projects</a>
-        <a class="btn btn-outline" href="https://github.com/NP3215" target="_blank" rel="noopener">GitHub profile</a>
-        <a class="btn btn-outline" href="Nathan_Phan_CV.pdf" download>Download CV</a>
+      <p class="statement">I build full-stack web apps and the integrations that connect them, from a WhatsApp and WeChat messaging bridge to a Chrome extension that writes your hashtags.</p>
+      <p class="intro-sub">I'm a Computer Science student at BINUS University @AlamSutera, based in Tangerang, Indonesia. I love learning new things and building products that solve real problems.</p>
+      <div class="intro-actions">
+        <a class="btn btn-primary" href="Nathan_Phan_CV.pdf" download>
+          <svg class="ic ic-stroke"><use href="#i-download"/></svg>Download CV
+        </a>
+        <a class="btn btn-ghost" href="#projects">See projects</a>
       </div>
     </div>
-    <div class="hero-art" aria-hidden="true">
-      <svg viewBox="0 0 320 320" fill="none">
-        <circle cx="90" cy="120" r="34" stroke="#5b7cfa" stroke-width="2"/>
-        <circle cx="230" cy="120" r="34" stroke="#5b7cfa" stroke-width="2"/>
-        <path d="M124 120 C 150 90, 200 90, 196 120" stroke="#5b7cfa" stroke-width="2"/>
-        <text x="90" y="126" fill="#c9d3ff" font-family="Inter" font-size="11" text-anchor="middle">WA</text>
-        <text x="230" y="126" fill="#c9d3ff" font-family="Inter" font-size="11" text-anchor="middle">WC</text>
-        <g transform="translate(96 190) rotate(-8)">
-          <path d="M0 20 L20 0 L86 0 L106 20 L86 40 L20 40 Z" stroke="#e8a548" stroke-width="2"/>
-          <circle cx="18" cy="20" r="4" fill="#e8a548"/>
-          <text x="63" y="25" fill="#f4d49b" font-family="Inter" font-size="12" text-anchor="middle">#tags</text>
+    <div class="motif-wrap" aria-hidden="true">
+      <!-- A message hopping between WhatsApp and WeChat: the idea behind the flagship project -->
+      <svg class="motif" viewBox="0 0 190 250" role="presentation">
+        <circle class="m-line" cx="38" cy="60" r="28"/>
+        <circle class="m-line" cx="152" cy="60" r="28"/>
+        <path id="bridge-arc" class="m-line" d="M66 60 C 82 30, 108 30, 124 60"/>
+        <text class="m-text" x="38" y="64" text-anchor="middle">WA</text>
+        <text class="m-text" x="152" y="64" text-anchor="middle">WC</text>
+        <circle class="m-dot" r="4">
+          <animateMotion dur="2.8s" repeatCount="indefinite" calcMode="linear" keyPoints="0;1;0" keyTimes="0;0.5;1"><mpath href="#bridge-arc"/></animateMotion>
+        </circle>
+        <g transform="translate(40 150) rotate(-7)">
+          <path class="m-tag" d="M0 20 L20 0 L92 0 L112 20 L92 40 L20 40 Z"/>
+          <circle class="m-dot-tag" cx="20" cy="20" r="4"/>
+          <text class="m-text" x="66" y="25" text-anchor="middle">#tags</text>
         </g>
       </svg>
     </div>
-  </div>
-</header>
+  </section>
 
-<section id="about">
-  <div class="wrap">
-    <div class="section-head">
+  <!-- Projects -->
+  <section class="block" id="projects">
+    <div class="block-head">
+      <h2>Projects</h2>
+      <p>Two flagship builds first, then two smaller ones. Each opens a case study with screenshots and how it works.</p>
+    </div>
+
+    <article class="feature">
+      <div class="feature-media">
+        <img src="Pictures/WhatsAppWeChatMain.png" alt="Unified inbox showing WhatsApp and WeChat conversations side by side" decoding="async">
+      </div>
+      <div class="feature-body">
+        <div>
+          <span class="kind">Cross-platform messaging</span>
+          <h3><a class="stretch" href="#/chatbridge">WhatsApp WeChat Messaging Bridge</a></h3>
+          <p>A dashboard that puts WhatsApp and WeChat conversations in one inbox, labelled by source, so a team can read and reply to customers on either app without switching tools.</p>
+        </div>
+        <div class="feature-side">
+          <ul class="chips"><li>React</li><li>ASP.NET Core</li><li>C#</li><li>Webhooks</li></ul>
+          <div class="feature-links">
+            <a class="text-link" href="https://we-chat-test.vercel.app" target="_blank" rel="noopener">Live site</a>
+            <a class="text-link" href="https://github.com/NP3215/WeChatTest" target="_blank" rel="noopener">Source</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="feature">
+      <div class="feature-media">
+        <img src="Pictures/IntaTagsMain.png" alt="InstaTags website hero, reading 'Save time on tags, spend it on content'" decoding="async" loading="lazy">
+      </div>
+      <div class="feature-body">
+        <div>
+          <span class="kind amber">Chrome extension and web app</span>
+          <h3><a class="stretch" href="#/instatags">InstaTags</a></h3>
+          <p>Turns a photo into ready-to-use Instagram hashtags. A set of AI models look at the image together and hand back a tag list you can drop straight into your caption.</p>
+        </div>
+        <div class="feature-side">
+          <ul class="chips"><li>JavaScript</li><li>Chrome Extension APIs</li><li>Vercel</li></ul>
+          <div class="feature-links">
+            <a class="text-link" href="https://tagsout.vercel.app" target="_blank" rel="noopener">Live site</a>
+            <a class="text-link" href="https://github.com/NP3215/ChromeExtension" target="_blank" rel="noopener">Source</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <h3 class="more-label">More projects</h3>
+    <div class="mini-grid">
+      <article class="mini">
+        <div class="feature-media">
+          <img src="Pictures/ServiceHubExplore.png" alt="ServiceHub app showing a list of nearby car workshops with ratings" decoding="async" loading="lazy">
+        </div>
+        <h3><a class="stretch" href="#/servicehub">ServiceHub</a></h3>
+        <p>Book a car workshop in a few taps: browse nearby bengkel, compare ratings, then pick a service, date and time slot.</p>
+        <ul class="chips"><li>Flutter</li><li>Dart</li><li>Mobile app</li></ul>
+        <div class="feature-links">
+          <a class="text-link" href="https://github.com/NP3215/ServiceHub" target="_blank" rel="noopener">Source</a>
+        </div>
+      </article>
+      <article class="mini">
+        <div class="feature-media">
+          <img src="Pictures/SetrumDashboard.png" alt="Setrum dashboard showing electricity usage charts and connected devices" decoding="async" loading="lazy">
+        </div>
+        <h3><a class="stretch" href="#/setrum">Setrum</a></h3>
+        <p>A home energy monitor that tracks electricity use by device and estimates the bill before it arrives.</p>
+        <ul class="chips"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+        <div class="feature-links">
+          <a class="text-link" href="https://github.com/NP3215/setrum" target="_blank" rel="noopener">Source</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section class="block" id="experience">
+    <div class="block-head">
+      <h2>Work experience</h2>
+    </div>
+    <ol class="timeline">
+      <li class="tl-item current">
+        <div class="tl-head">
+          <h3>Software Engineer</h3>
+          <span class="tl-dates">July 2026 – Present</span>
+        </div>
+        <p class="tl-company">PT. Batavia Satu<small>Part-time</small></p>
+        <ul class="bullets">
+          <li>Built an enterprise purchase-order management web application end to end, across an ASP.NET/C# backend and a React front end.</li>
+          <li>Implemented supplier and store-selection workflows, dynamic edit forms, and the underlying database repositories.</li>
+          <li>Designed and built a messaging bridge connecting the internal system to WhatsApp and WeChat for automated, cross-platform notifications.</li>
+          <li>Worked across the stack, from backend services to front-end views, as part of a small engineering team.</li>
+        </ul>
+      </li>
+      <li class="tl-item">
+        <div class="tl-head">
+          <h3>Software Engineer</h3>
+          <span class="tl-dates">July 2025 – August 2025</span>
+        </div>
+        <p class="tl-company">PT. Cellbox<small>Internship</small></p>
+        <ul class="bullets">
+          <li>Worked on software infrastructure and databases, including MySQL, using Dapper ORM for data access.</li>
+          <li>Built and maintained web application features supporting the company's internal website.</li>
+          <li>Worked on CRUD functionalities for core business entities.</li>
+        </ul>
+      </li>
+    </ol>
+  </section>
+
+  <!-- About -->
+  <section class="block" id="about">
+    <div class="block-head">
       <h2>About me</h2>
     </div>
-    <div class="about-body">
+    <div class="about-grid">
       <div>
-        <p>
-          I'm currently studying Computer Science with a focus on Software Engineering. I'm passionate about creating efficient and user-friendly applications.
-        </p>
-        <p>
-          One of the projects that i am proud of is the WhatsApp WeChat messaging bridge, which allows users to manage conversations from both platforms in a single interface.
-        </p>
+        <p>I'm currently studying Computer Science with a focus on Software Engineering. I'm passionate about creating efficient and user-friendly applications.</p>
+        <p>One of the projects that I am proud of is the WhatsApp WeChat messaging bridge, which allows users to manage conversations from both platforms in a single interface.</p>
       </div>
-      <dl class="about-facts">
-        <div class="fact">
-          <dt>Based in</dt>
-          <dd>Tangerang, Banten, Indonesia</dd>
-        </div>
-        <div class="fact">
-          <dt>Studying</dt>
-          <dd>Computer Science at BINUS University @AlamSutera</dd>
-        </div>
-        <div class="fact">
-          <dt>Elsewhere</dt>
-          <dd><a href="https://github.com/NP3215" target="_blank" rel="noopener">github.com/NP3215</a></dd>
-        </div>
+      <dl class="facts">
+        <div class="fact"><dt>Based in</dt><dd>Tangerang, Banten, Indonesia</dd></div>
+        <div class="fact"><dt>Studying</dt><dd>Computer Science at BINUS University @AlamSutera, August 2024 – Present</dd></div>
+        <div class="fact"><dt>Working</dt><dd>Software Engineer (Part-Time) at PT. Batavia Satu</dd></div>
+        <div class="fact"><dt>Looking for</dt><dd>Internship opportunities</dd></div>
       </dl>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="skills">
-  <div class="wrap">
-    <div class="section-head">
+  <!-- Skills -->
+  <section class="block" id="skills">
+    <div class="block-head">
       <h2>Skills &amp; expertise</h2>
     </div>
-    <div class="skill-groups">
-      <div class="skill-group">
+
+    <div class="skills-grid">
+      <div class="skill">
+        <div class="skill-icon"><svg class="ic ic-stroke"><use href="#i-code"/></svg></div>
+        <div>
+          <h3>Full-stack web development</h3>
+          <p>C# and ASP.NET services paired with React front ends, from purchase-order workflows to dynamic forms.</p>
+        </div>
+      </div>
+      <div class="skill">
+        <div class="skill-icon"><svg class="ic ic-stroke"><use href="#i-database"/></svg></div>
+        <div>
+          <h3>Back end and databases</h3>
+          <p>SQL Server and MySQL with Dapper ORM and LINQ, including repositories for CRUD-heavy business entities.</p>
+        </div>
+      </div>
+      <div class="skill">
+        <div class="skill-icon"><svg class="ic ic-stroke"><use href="#i-layout"/></svg></div>
+        <div>
+          <h3>Front end</h3>
+          <p>React, AngularJS, JavaScript, HTML and CSS, focused on small, usable interfaces.</p>
+        </div>
+      </div>
+      <div class="skill">
+        <div class="skill-icon"><svg class="ic ic-stroke"><use href="#i-plug"/></svg></div>
+        <div>
+          <h3>API integrations</h3>
+          <p>Connecting internal systems to WhatsApp, WeChat and the Facebook API, with endpoints tested in Postman.</p>
+        </div>
+      </div>
+      <div class="skill">
+        <div class="skill-icon"><svg class="ic ic-stroke"><use href="#i-briefcase"/></svg></div>
+        <div>
+          <h3>Business applications</h3>
+          <p>ERP systems, supply chain and business-process workflows, built with the team that uses them.</p>
+        </div>
+      </div>
+      <div class="skill">
+        <div class="skill-icon"><svg class="ic ic-stroke"><use href="#i-device"/></svg></div>
+        <div>
+          <h3>Mobile and browser apps</h3>
+          <p>Flutter for ServiceHub and Chrome extension APIs for InstaTags.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tools">
+      <div class="tools-row">
         <h3>Languages</h3>
-        <ul>
-          <li>C#</li>
-          <li>JavaScript</li>
-          <li>CSS</li>
-          <li>Java</li>
-          <li>HTML</li>
-          <li>Python</li>
-        </ul>
+        <ul class="chips"><li>C#</li><li>JavaScript</li><li>Python</li><li>Java</li><li>HTML</li><li>CSS</li></ul>
       </div>
-      <div class="skill-group">
-        <h3>Frameworks &amp; Tools</h3>
-        <ul>
-          <li>ASP.NET MVC</li>
-          <li>ASP.NET Web API</li>
-          <li>AngularJS</li>
-          <li>Dapper ORM</li>
-          <li>LINQ</li>
-          <li>Microsoft SQL Server</li>
-          <li>MySQL</li>
-          <li>Postman</li>
-          <li>Facebook API</li>
-          <li>Git & GitHub</li>
-        </ul>
-      </div>
-      <div class="skill-group">
-        <h3>What I focus on</h3>
-        <ul>
-          <li>Full-stack web development</li>
-          <li>CRUD-heavy business applications</li>
-          <li>Software infrastructure & databases</li>
-          <li>Supply chain & business process workflows</li>
-          <li>Teamwork across cross-functional teams</li>
-        </ul>
+      <div class="tools-row">
+        <h3>Frameworks &amp; tools</h3>
+        <ul class="chips"><li>ASP.NET MVC</li><li>ASP.NET Web API</li><li>React</li><li>AngularJS</li><li>Flutter</li><li>Dapper ORM</li><li>LINQ</li><li>Microsoft SQL Server</li><li>MySQL</li><li>Postman</li><li>Facebook API</li><li>Git &amp; GitHub</li></ul>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="projects">
-  <div class="wrap">
-    <div class="section-head">
-      <h2>Projects</h2>
-      <p>Four recent projects. Each one opens onto a page with more screenshots and detail.</p>
+  <!-- Contact -->
+  <section class="contact" id="contact">
+    <h2>Let's talk</h2>
+    <p>I'm open to internship opportunities. If you're building something worth shipping, send me a message.</p>
+    <div class="contact-actions">
+      <a class="btn btn-primary" href="mailto:nathanphan.nate@gmail.com"><svg class="ic ic-stroke"><use href="#i-mail"/></svg>Email me</a>
+      <button class="btn btn-ghost" type="button" data-copy="nathanphan.nate@gmail.com" aria-live="polite">Copy email</button>
+      <a class="btn btn-ghost" href="Nathan_Phan_CV.pdf" download><svg class="ic ic-stroke"><use href="#i-download"/></svg>Download CV</a>
     </div>
-
-    <div class="project-feature">
-      <div class="feature-media">
-        <img src="../Pictures/IntaTagsMain.png" alt="InstaTags website hero, reading 'Save time on tags, spend it on content'">
-      </div>
-      <div>
-        <span class="feature-tag gold">Chrome extension</span>
-        <h3>InstaTags</h3>
-        <p>
-          Turns a photo into ready-to-use Instagram hashtags. A set of AI models
-          look at the image together and hand back a tag list you can drop
-          straight into your caption — as a Chrome extension or a web app.
-        </p>
-        <a class="feature-link" href="#/instatags">View project →</a>
-      </div>
+    <div class="contact-links">
+      <a class="text-link" href="https://www.linkedin.com/in/nathan-phan-218a88367/" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="text-link" href="https://github.com/NP3215" target="_blank" rel="noopener">GitHub</a>
     </div>
-
-    <div class="project-feature reverse">
-      <div class="feature-media">
-        <img src="../Pictures/WhatsAppWeChatMain.png" alt="Unified inbox showing WhatsApp and WeChat conversations side by side">
-      </div>
-      <div>
-        <span class="feature-tag blue">Cross-platform messaging</span>
-        <h3>WhatsApp WeChat Messaging Bridge</h3>
-        <p>
-          A dashboard that puts WhatsApp and WeChat conversations in one inbox,
-          labelled by source, so a team can read and reply to customers on
-          either app without switching tools.
-        </p>
-        <a class="feature-link" href="#/chatbridge">View project →</a>
-      </div>
-    </div>
-
-    <div class="project-feature">
-      <div class="feature-media">
-        <img src="../Pictures/ServiceHubExplore.png" alt="ServiceHub app showing a list of nearby car workshops with ratings">
-      </div>
-      <div>
-        <span class="feature-tag gold">Mobile app</span>
-        <h3>ServiceHub</h3>
-        <p>
-          A booking app for car workshops — browse nearby bengkel, compare
-          ratings and services, then pick a service, date and time slot in a
-          few taps.
-        </p>
-        <a class="feature-link" href="#/servicehub">View project →</a>
-      </div>
-    </div>
-
-    <div class="project-feature reverse">
-      <div class="feature-media">
-        <img src="../Pictures/SetrumDashboard.png" alt="Setrum dashboard showing electricity usage charts and connected devices">
-      </div>
-      <div>
-        <span class="feature-tag blue">Web dashboard</span>
-        <h3>Setrum</h3>
-        <p>
-          A home energy monitor — track electricity usage by device, see it
-          broken down daily, monthly or annually, and get an estimated bill
-          before it arrives.
-        </p>
-        <a class="feature-link" href="#/setrum">View project →</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<footer id="contact">
-  <div class="wrap">
-    <div class="footer-contact">
-      <p>Open to internship opportunities.</p>
-      <p><a href="mailto:nathanphan.nate@gmail.com">nathanphan.nate@gmail.com</a> · Tangerang, Indonesia</p>
-    </div>
-    <div class="footer-social">
-      <a href="https://github.com/NP3215" target="_blank" rel="noopener">GitHub</a>
-      <a href="https://www.linkedin.com/in/nathan-phan-218a88367/" target="_blank" rel="noopener">LinkedIn</a>
-    </div>
-  </div>
-  <div class="wrap footer-note">© 2026 Nathan. Built with HTML, CSS and a little JS — deployed on Vercel.</div>
-</footer>
+  </section>
+  <p class="site-foot">© 2026 Nathan Phan. Built with HTML, CSS and a little JavaScript, deployed on Vercel.</p>
 
 </div><!-- /#page-home -->
 
 
-<div class="page" id="page-instatags" data-title="InstaTags — Nathan" hidden>
+<!-- ===========================================================
+     PAGE: WhatsApp WeChat Messaging Bridge
+     =========================================================== -->
+<div class="page" id="page-chatbridge" data-title="WhatsApp WeChat Messaging Bridge — Nathan Phan" hidden>
+  <a class="back" href="#projects"><svg class="ic ic-stroke"><use href="#i-back"/></svg>All projects</a>
 
-<header class="project-hero">
-  <div class="wrap">
-    <a class="back-link" href="#projects">← Back to projects</a>
-    <h1>InstaTags</h1>
-    <p class="project-tagline">
-      A Chrome extension and web app that turns a photo into ready-to-use
-      Instagram hashtags, so posting takes less time and less guessing.
-    </p>
-    <dl class="project-meta">
-      <div class="meta-item">
-        <dt>role</dt>
-        <dd>Developer</dd>
-      </div>
-      <div class="meta-item">
-        <dt>type</dt>
-        <dd>Chrome extension + web app</dd>
-      </div>
-      <div class="meta-item">
-        <dt>live</dt>
-        <dd><a href="https://tagsout.vercel.app" target="_blank" rel="noopener">tagsout.vercel.app</a></dd>
-      </div>
-    </dl>
-  </div>
-</header>
-
-<section>
-  <div class="wrap">
-    <div class="detail-block">
-      <h2>Overview</h2>
-      <p>
-        InstaTags exists to solve one small, repetitive problem: coming up with
-        a good set of hashtags every time you post. Instead of hand-picking tags
-        or copying a generic list, InstaTags looks at the photo itself. Several
-        lightweight AI models each analyze a different signal in the image —
-        subject, style, colour, mood — and their findings are combined into one
-        set of relevant tags.
-      </p>
-      <p>
-        It's built two ways: as a Chrome extension that plugs directly into the
-        Instagram posting flow, and as a standalone web app for anyone who just
-        wants to drop in an image and copy the results.
-      </p>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <div class="section-head">
-      <h2>Screenshots</h2>
-    </div>
-    <div class="shot-grid">
-      <figure class="shot">
-        <img src="../Pictures/LandingPageInstaTags.png" alt="InstaTags landing page">
-        <figcaption>Landing page — the pitch in one line.</figcaption>
-      </figure>
-      <figure class="shot">
-        <img src="../Pictures/UploadPageInstaTags.png" alt="InstaTags upload screen">
-        <figcaption>Upload screen for the web app version.</figcaption>
-      </figure>
-      <figure class="shot">
-        <img src="../Pictures/demo1InstaTags.png" alt="InstaTags how-to-use steps for the Chrome extension">
-        <figcaption>Preview for the Chrome Web Hashtag Generator.</figcaption>
-      </figure>
-      <figure class="shot">
-        <img src="../Pictures/demo2InstaTags.png" alt="InstaTags how-to-use steps for the Chrome extension">
-        <figcaption>Preview for the Chrome extension Hashtag Generator.</figcaption>
-      </figure>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <div class="section-head">
-      <h2>How it works, extension side</h2>
-    </div>
-    <ol class="step-list">
-      <li>Create a new post on Instagram and choose the photo or video.</li>
-      <li>Go through the usual editing steps until you reach the caption screen.</li>
-      <li>Open the InstaTags extension icon to launch the hashtag generator.</li>
-      <li>Let it analyze the image — this takes a few seconds.</li>
-      <li>Review the suggested hashtags.</li>
-      <li>Copy the tags into your caption and post.</li>
-    </ol>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <div class="section-head">
-      <h2>What I built</h2>
-    </div>
-    <ul class="feature-list">
-      <li>Chrome extension that reads the photo mid-upload and generates matching hashtags inline.</li>
-      <li>Companion web app for tagging an image without installing anything.</li>
-      <li>Multiple models analysing the same image from different angles, merged into one tag list.</li>
-      <li>One-click copy so tags go straight into the caption.</li>
-    </ul>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <div class="section-head">
-      <h2>Stack</h2>
-    </div>
-    <div class="stack-chips">
-      <span class="chip">JavaScript</span>
-      <span class="chip">Chrome Extension APIs</span>
-      <span class="chip">Image recognition models</span>
-      <span class="chip">Vercel</span>
-    </div>
-    <div class="project-links" style="margin-top:28px;">
-      <a class="btn btn-outline" href="https://github.com/NP3215/ChromeExtension" target="_blank" rel="noopener">View code on GitHub</a>
-      <a class="btn btn-primary" href="https://tagsout.vercel.app" target="_blank" rel="noopener">Open live site</a>
-    </div>
-  </div>
-</section>
-
-<div class="wrap">
-  <div class="next-project">
-    <div>
-      <div class="label">Next project</div>
-      <div class="title">WhatsApp WeChat Messaging Bridge</div>
-    </div>
-    <a class="btn btn-outline" href="#/chatbridge">View →</a>
-  </div>
-</div>
-
-<footer>
-  <div class="wrap footer-note">© 2026 Nathan. Built with HTML, CSS and a little JS — deployed on Vercel.</div>
-</footer>
-
-</div><!-- /#page-instatags -->
-
-
-<div class="page" id="page-chatbridge" data-title="WhatsApp WeChat Messaging Bridge — Nathan" hidden>
-
-<header class="project-hero">
-  <div class="wrap">
-    <a class="back-link" href="#projects">← Back to projects</a>
+  <header class="cs-head">
     <h1>WhatsApp WeChat Messaging Bridge</h1>
-    <p class="project-tagline">
-      A third-party dashboard that connects WhatsApp and WeChat business
-      accounts, so conversations from both apps show up in a single inbox.
-    </p>
-    <dl class="project-meta">
-      <div class="meta-item">
-        <dt>role</dt>
-        <dd>Full-stack Developer</dd>
-      </div>
-      <div class="meta-item">
-        <dt>type</dt>
-        <dd>Cross-platform messaging dashboard</dd>
-      </div>
-      <div class="meta-item">
-        <dt>live</dt>
-        <dd><a href="https://we-chat-test.vercel.app" target="_blank" rel="noopener">we-chat-test.vercel.app</a></dd>
-      </div>
+    <p class="cs-tagline">A third-party dashboard that connects WhatsApp and WeChat business accounts, so conversations from both apps show up in a single inbox.</p>
+    <dl class="meta">
+      <div><dt>Role</dt><dd>Full-stack Developer</dd></div>
+      <div><dt>Type</dt><dd>Cross-platform messaging dashboard</dd></div>
+      <div><dt>Live</dt><dd><a href="https://we-chat-test.vercel.app" target="_blank" rel="noopener">we-chat-test.vercel.app</a></dd></div>
     </dl>
-  </div>
-</header>
-
-<section>
-  <div class="wrap">
-    <div class="detail-block">
-      <h2>Overview</h2>
-      <p>
-        Businesses that talk to customers on both WhatsApp and WeChat usually
-        end up juggling two separate apps, two separate logins, and two
-        separate habits. This platform merges both into one inbox: every
-        conversation is tagged by where it came from — <strong>[WA]</strong> or
-        <strong>[WC]</strong> — but read, sent, and searched from the same
-        screen. Each contact can be renamed inline, individual messages can be
-        deleted, and attachments — like documents or images — get sent the
-        same way whichever platform the conversation started on.
-      </p>
+    <div class="cs-actions">
+      <a class="btn btn-primary" href="https://we-chat-test.vercel.app" target="_blank" rel="noopener">Open live site</a>
+      <a class="btn btn-ghost" href="https://github.com/NP3215/WeChatTest" target="_blank" rel="noopener">View code on GitHub</a>
     </div>
-  </div>
-</section>
+  </header>
 
-<section>
-  <div class="wrap">
-    <div class="section-head">
-      <h2>Screenshots</h2>
+  <section class="cs-section">
+    <h2>Overview</h2>
+    <p>Businesses that talk to customers on both WhatsApp and WeChat usually end up juggling two separate apps, two separate logins, and two separate habits. This platform merges both into one inbox: every conversation is tagged by where it came from, <strong>[WA]</strong> or <strong>[WC]</strong>, but read, sent, and searched from the same screen.</p>
+    <p>Each contact can be renamed inline, individual messages can be deleted, and attachments such as documents or images are sent the same way whichever platform the conversation started on.</p>
+  </section>
+
+  <section class="cs-section">
+    <h2>How it fits together</h2>
+    <div class="flow">
+      <div class="flow-col">
+        <div class="node"><b>WhatsApp</b>WhatsApp API</div>
+        <div class="node"><b>WeChat</b>WeChat API</div>
+      </div>
+      <svg class="flow-arrow ic-stroke" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow"/></svg>
+      <div class="flow-col">
+        <div class="node blue"><b>Webhooks</b>Incoming messages from both platforms</div>
+        <div class="node blue"><b>ASP.NET Core Web API</b>C# back end and REST endpoints</div>
+      </div>
+      <svg class="flow-arrow ic-stroke" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow"/></svg>
+      <div class="flow-col">
+        <div class="node"><b>React inbox</b>One list, each chat labelled [WA] or [WC]</div>
+      </div>
     </div>
-    <div class="shot-grid">
-      <figure class="shot wide">
-        <img src="../Pictures/ChatBridgeInbox.png" alt="Unified inbox with WhatsApp and WeChat chats listed together, labelled WA and WC, with an open conversation on the right">
-        <figcaption>Chat list — WhatsApp and WeChat conversations side by side, each labelled by source.</figcaption>
+    <p class="flow-note">Messages from both platforms arrive by webhook and land in one inbox. Replies and attachments go back out through each platform's API.</p>
+  </section>
+
+  <section class="cs-section">
+    <h2>Screenshots</h2>
+    <div class="gallery one">
+      <figure class="shot">
+        <button class="shot-btn" type="button" aria-label="Enlarge screenshot"><img src="Pictures/ChatBridgeInbox.png" alt="Unified inbox with WhatsApp and WeChat chats listed together, labelled WA and WC, with an open conversation on the right" loading="lazy" decoding="async"></button>
+        <figcaption>Chat list: WhatsApp and WeChat conversations side by side, each labelled by source.</figcaption>
       </figure>
-      <figure class="shot wide">
-        <img src="../Pictures/ChatBridgeConversation.png" alt="Open conversation showing sent and received messages plus a sent file attachment">
+      <figure class="shot">
+        <button class="shot-btn" type="button" aria-label="Enlarge screenshot"><img src="Pictures/ChatBridgeConversation.png" alt="Open conversation showing sent and received messages plus a sent file attachment" loading="lazy" decoding="async"></button>
         <figcaption>An open conversation, with per-message delete and file attachments.</figcaption>
       </figure>
     </div>
-  </div>
-</section>
+  </section>
 
-<section>
-  <div class="wrap">
-    <div class="section-head">
-      <h2>What I built</h2>
-    </div>
-    <ul class="feature-list">
+  <section class="cs-section">
+    <h2>What I built</h2>
+    <ul class="bullets">
       <li>Unified inbox that merges WhatsApp and WeChat conversations, clearly labelled by source.</li>
       <li>Per-conversation view with timestamps, inline contact renaming, and per-message delete.</li>
       <li>File and image attachments sent the same way regardless of which platform the chat is on.</li>
       <li>Built for support teams who'd otherwise need two separate tools open at once.</li>
     </ul>
-  </div>
-</section>
+  </section>
 
-<section>
-  <div class="wrap">
-    <div class="section-head">
-      <h2>Stack</h2>
-    </div>
-    <div class="stack-chips">
-      <span class="chip">React</span>
-      <span class="chip">ASP.NET Core</span>
-      <span class="chip">ASP.NET Web API</span>
-      <span class="chip">C#</span>
-      <span class="chip">REST APIs</span>
-      <span class="chip">Webhook integration</span>
-      <span class="chip">Microsoft Azure</span>
-      <span class="chip">WeChat API</span>
-      <span class="chip">WhatsApp API</span>
-    </div>
-    <div class="project-links" style="margin-top:28px;">
-      <a class="btn btn-outline" href="https://github.com/NP3215/WeChatTest" target="_blank" rel="noopener">View code on GitHub</a>
-      <a class="btn btn-primary" href="https://we-chat-test.vercel.app" target="_blank" rel="noopener">Open live site</a>
-    </div>
-  </div>
-</section>
+  <section class="cs-section">
+    <h2>Stack</h2>
+    <ul class="chips">
+      <li>React</li><li>ASP.NET Core</li><li>ASP.NET Web API</li><li>C#</li><li>REST APIs</li><li>Webhook integration</li><li>Microsoft Azure</li><li>WeChat API</li><li>WhatsApp API</li>
+    </ul>
+  </section>
 
-<div class="wrap">
   <div class="next-project">
-    <div>
-      <div class="label">Next project</div>
-      <div class="title">ServiceHub</div>
-    </div>
-    <a class="btn btn-outline" href="#/servicehub">View →</a>
+    <div><div class="label">Next project</div><div class="title">InstaTags</div></div>
+    <a class="btn btn-ghost" href="#/instatags">View project</a>
   </div>
-</div>
-
-<footer>
-  <div class="wrap footer-note">© 2026 Nathan. Built with HTML, CSS and a little JS — deployed on Vercel.</div>
-</footer>
-
 </div><!-- /#page-chatbridge -->
 
 
-<div class="page" id="page-servicehub" data-title="ServiceHub — Nathan" hidden>
+<!-- ===========================================================
+     PAGE: InstaTags
+     =========================================================== -->
+<div class="page" id="page-instatags" data-title="InstaTags — Nathan Phan" hidden>
+  <a class="back" href="#projects"><svg class="ic ic-stroke"><use href="#i-back"/></svg>All projects</a>
 
-<header class="project-hero">
-  <div class="wrap">
-    <a class="back-link" href="#projects">← Back to projects</a>
-    <h1>ServiceHub</h1>
-    <p class="project-tagline">
-      A mobile app for finding and booking a car workshop — browse nearby
-      options, then book a service in a few taps.
-    </p>
-    <dl class="project-meta">
-      <div class="meta-item">
-        <dt>role</dt>
-        <dd>Mobile Developer</dd>
-      </div>
-      <div class="meta-item">
-        <dt>type</dt>
-        <dd>Mobile app</dd>
-      </div>
-      <div class="meta-item">
-        <dt>status</dt>
-        <dd>Finished</dd>
-      </div>
+  <header class="cs-head">
+    <h1>InstaTags</h1>
+    <p class="cs-tagline">A Chrome extension and web app that turns a photo into ready-to-use Instagram hashtags, so posting takes less time and less guessing.</p>
+    <dl class="meta">
+      <div><dt>Role</dt><dd>Developer</dd></div>
+      <div><dt>Type</dt><dd>Chrome extension + web app</dd></div>
+      <div><dt>Live</dt><dd><a href="https://tagsout.vercel.app" target="_blank" rel="noopener">tagsout.vercel.app</a></dd></div>
     </dl>
-  </div>
-</header>
-
-<section>
-  <div class="wrap">
-    <div class="detail-block">
-      <h2>Overview</h2>
-      <p>
-        Finding a trustworthy car workshop usually means asking around or
-        scrolling through reviews on a maps app with no idea what's actually
-        available. ServiceHub puts that in one place: nearby workshops with
-        ratings and specialties up front, and a booking flow that takes you
-        from "I need an oil change" to a confirmed time slot without leaving
-        the app.
-      </p>
-      <p>
-        The booking flow is the core of it — pick what you need done, pick a
-        date from the calendar, pick an open time slot, add a note for the
-        technician if something specific needs attention, and confirm.
-      </p>
+    <div class="cs-actions">
+      <a class="btn btn-primary" href="https://tagsout.vercel.app" target="_blank" rel="noopener">Open live site</a>
+      <a class="btn btn-ghost" href="https://github.com/NP3215/ChromeExtension" target="_blank" rel="noopener">View code on GitHub</a>
     </div>
-  </div>
-</section>
+  </header>
 
-<section>
-  <div class="wrap">
-    <div class="section-head">
-      <h2>Screenshots</h2>
+  <figure class="shot cs-lead">
+    <button class="shot-btn" type="button" aria-label="Enlarge screenshot"><img src="Pictures/IntaTagsMain.png" alt="InstaTags website hero, reading 'Save time on tags, spend it on content'" decoding="async"></button>
+  </figure>
+
+  <section class="cs-section">
+    <h2>Overview</h2>
+    <p>InstaTags exists to solve one small, repetitive problem: coming up with a good set of hashtags every time you post. Instead of hand-picking tags or copying a generic list, InstaTags looks at the photo itself. Several lightweight AI models each analyze a different signal in the image (subject, style, colour, mood) and their findings are combined into one set of relevant tags.</p>
+    <p>It's built two ways: as a Chrome extension that plugs directly into the Instagram posting flow, and as a standalone web app for anyone who just wants to drop in an image and copy the results.</p>
+  </section>
+
+  <section class="cs-section">
+    <h2>How it fits together</h2>
+    <div class="flow">
+      <div class="flow-col">
+        <div class="node amber"><b>Your photo</b>From the Instagram post, or dropped into the web app</div>
+      </div>
+      <svg class="flow-arrow ic-stroke" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow"/></svg>
+      <div class="flow-col">
+        <div class="node"><b>Image models</b>Subject, style, colour and mood, each read separately</div>
+      </div>
+      <svg class="flow-arrow ic-stroke" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow"/></svg>
+      <div class="flow-col">
+        <div class="node amber"><b>One tag list</b>Findings merged, ready to copy into the caption</div>
+      </div>
     </div>
-    <div class="shot-grid">
+  </section>
+
+  <section class="cs-section">
+    <h2>Screenshots</h2>
+    <div class="gallery">
       <figure class="shot">
-        <img src="../Pictures/ServiceHubSignup.png" alt="ServiceHub account sign-up screen">
+        <button class="shot-btn" type="button" aria-label="Enlarge screenshot"><img src="Pictures/LandingPageInstaTags.png" alt="InstaTags landing page" loading="lazy" decoding="async"></button>
+        <figcaption>Landing page: the pitch in one line.</figcaption>
+      </figure>
+      <figure class="shot">
+        <button class="shot-btn" type="button" aria-label="Enlarge screenshot"><img src="Pictures/UploadPageInstaTags.png" alt="InstaTags upload screen" loading="lazy" decoding="async"></button>
+        <figcaption>Upload screen for the web app version.</figcaption>
+      </figure>
+      <figure class="shot">
+        <button class="shot-btn" type="button" aria-label="Enlarge screenshot"><img src="Pictures/demo1InstaTags.png" alt="InstaTags web hashtag generator preview" loading="lazy" decoding="async"></button>
+        <figcaption>Preview of the web hashtag generator.</figcaption>
+      </figure>
+      <figure class="shot">
+        <button class="shot-btn" type="button" aria-label="Enlarge screenshot"><img src="Pictures/demo2InstaTags.png" alt="InstaTags Chrome extension hashtag generator preview" loading="lazy" decoding="async"></button>
+        <figcaption>Preview of the Chrome extension hashtag generator.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="cs-section">
+    <h2>Using the extension</h2>
+    <ol class="steps">
+      <li>Create a new post on Instagram and choose the photo or video.</li>
+      <li>Go through the usual editing steps until you reach the caption screen.</li>
+      <li>Open the InstaTags extension icon to launch the hashtag generator.</li>
+      <li>Let it analyze the image. This takes a few seconds.</li>
+      <li>Review the suggested hashtags.</li>
+      <li>Copy the tags into your caption and post.</li>
+    </ol>
+  </section>
+
+  <section class="cs-section">
+    <h2>What I built</h2>
+    <ul class="bullets">
+      <li>Chrome extension that reads the photo mid-upload and generates matching hashtags inline.</li>
+      <li>Companion web app for tagging an image without installing anything.</li>
+      <li>Multiple models analysing the same image from different angles, merged into one tag list.</li>
+      <li>One-click copy so tags go straight into the caption.</li>
+    </ul>
+  </section>
+
+  <section class="cs-section">
+    <h2>Stack</h2>
+    <ul class="chips"><li>JavaScript</li><li>Chrome Extension APIs</li><li>Image recognition models</li><li>Vercel</li></ul>
+  </section>
+
+  <div class="next-project">
+    <div><div class="label">Next project</div><div class="title">ServiceHub</div></div>
+    <a class="btn btn-ghost" href="#/servicehub">View project</a>
+  </div>
+</div><!-- /#page-instatags -->
+
+
+<!-- ===========================================================
+     PAGE: ServiceHub
+     =========================================================== -->
+<div class="page" id="page-servicehub" data-title="ServiceHub — Nathan Phan" hidden>
+  <a class="back" href="#projects"><svg class="ic ic-stroke"><use href="#i-back"/></svg>All projects</a>
+
+  <header class="cs-head">
+    <h1>ServiceHub</h1>
+    <p class="cs-tagline">A mobile app for finding and booking a car workshop: browse nearby options, then book a service in a few taps.</p>
+    <dl class="meta">
+      <div><dt>Role</dt><dd>Mobile Developer</dd></div>
+      <div><dt>Type</dt><dd>Mobile app</dd></div>
+      <div><dt>Status</dt><dd>Finished</dd></div>
+    </dl>
+    <div class="cs-actions">
+      <a class="btn btn-ghost" href="https://github.com/NP3215/ServiceHub" target="_blank" rel="noopener">View code on GitHub</a>
+    </div>
+  </header>
+
+  <section class="cs-section">
+    <h2>Overview</h2>
+    <p>Finding a trustworthy car workshop usually means asking around or scrolling through reviews on a maps app with no idea what's actually available. ServiceHub puts that in one place: nearby workshops with ratings and specialties up front, and a booking flow that takes you from "I need an oil change" to a confirmed time slot without leaving the app.</p>
+    <p>The booking flow is the core of it. Pick what you need done, pick a date from the calendar, pick an open time slot, add a note for the technician if something specific needs attention, and confirm.</p>
+  </section>
+
+  <section class="cs-section">
+    <h2>Screenshots</h2>
+    <div class="gallery three">
+      <figure class="shot">
+        <button class="shot-btn" type="button" aria-label="Enlarge screenshot"><img src="Pictures/ServiceHubSignup.png" alt="ServiceHub account sign-up screen" loading="lazy" decoding="async"></button>
         <figcaption>Sign-up screen.</figcaption>
       </figure>
       <figure class="shot">
-        <img src="../Pictures/ServiceHubLogin.png" alt="ServiceHub login screen">
-        <figcaption>Login screen, with Google and Apple options.</figcaption>
+        <button class="shot-btn" type="button" aria-label="Enlarge screenshot"><img src="Pictures/ServiceHubLogin.png" alt="ServiceHub login screen" loading="lazy" decoding="async"></button>
+        <figcaption>Login, with Google and Apple options.</figcaption>
       </figure>
       <figure class="shot">
-        <img src="../Pictures/ServiceHubExplore.png" alt="ServiceHub explore screen listing nearby workshops">
-        <figcaption>Explore — nearby and popular workshops, with ratings.</figcaption>
+        <button class="shot-btn" type="button" aria-label="Enlarge screenshot"><img src="Pictures/ServiceHubExplore.png" alt="ServiceHub explore screen listing nearby workshops" loading="lazy" decoding="async"></button>
+        <figcaption>Explore: nearby and popular workshops, with ratings.</figcaption>
       </figure>
       <figure class="shot">
-        <img src="../Pictures/ServiceHubProfile.png" alt="ServiceHub profile screen">
-        <figcaption>Profile — vehicle data, saved addresses, payment methods.</figcaption>
-      </figure>
-      <figure class="shot">
-        <img src="../Pictures/ServiceHubBookingDate.png" alt="ServiceHub booking screen with service type and calendar">
+        <button class="shot-btn" type="button" aria-label="Enlarge screenshot"><img src="Pictures/ServiceHubBookingDate.png" alt="ServiceHub booking screen with service type and calendar" loading="lazy" decoding="async"></button>
         <figcaption>Choose a service type and a date.</figcaption>
       </figure>
       <figure class="shot">
-        <img src="../Pictures/ServiceHubBookingSlot.png" alt="ServiceHub booking screen with time slots and notes">
+        <button class="shot-btn" type="button" aria-label="Enlarge screenshot"><img src="Pictures/ServiceHubBookingSlot.png" alt="ServiceHub booking screen with time slots and notes" loading="lazy" decoding="async"></button>
         <figcaption>Pick a time slot and add notes for the technician.</figcaption>
       </figure>
+      <figure class="shot">
+        <button class="shot-btn" type="button" aria-label="Enlarge screenshot"><img src="Pictures/ServiceHubProfile.png" alt="ServiceHub profile screen" loading="lazy" decoding="async"></button>
+        <figcaption>Profile: vehicle data, saved addresses, payment methods.</figcaption>
+      </figure>
     </div>
-  </div>
-</section>
+  </section>
 
-<section>
-  <div class="wrap">
-    <div class="section-head">
-      <h2>What I built</h2>
-    </div>
-    <ul class="feature-list">
+  <section class="cs-section">
+    <h2>What I built</h2>
+    <ul class="bullets">
       <li>Sign-up and login flow, including Google and Apple sign-in.</li>
       <li>Workshop discovery with search, filters (nearest, most popular) and ratings.</li>
       <li>A three-step booking flow: service type, date, then time slot.</li>
       <li>Optional notes field so a customer can flag something specific before the appointment.</li>
       <li>Profile screen for vehicle data, saved addresses, payment methods and account settings.</li>
     </ul>
-  </div>
-</section>
+  </section>
 
-<section>
-  <div class="wrap">
-    <div class="section-head">
-      <h2>Stack</h2>
-    </div>
-    <div class="stack-chips">
-      <span class="chip">Flutter / Dart</span>
-      <span class="chip">Database</span>
-      <span class="chip">Git</span>
-    </div>
-    <div class="project-links" style="margin-top:28px;">
-      <a class="btn btn-outline" href="https://github.com/NP3215/ServiceHub" target="_blank" rel="noopener">View code on GitHub</a>
-    </div>
-  </div>
-</section>
+  <section class="cs-section">
+    <h2>Stack</h2>
+    <ul class="chips"><li>Flutter / Dart</li><li>Database</li><li>Git</li></ul>
+  </section>
 
-<div class="wrap">
   <div class="next-project">
-    <div>
-      <div class="label">Next project</div>
-      <div class="title">Setrum</div>
-    </div>
-    <a class="btn btn-outline" href="#/setrum">View →</a>
+    <div><div class="label">Next project</div><div class="title">Setrum</div></div>
+    <a class="btn btn-ghost" href="#/setrum">View project</a>
   </div>
-</div>
-
-<footer>
-  <div class="wrap footer-note">© 2026 Nathan. Built with HTML, CSS and a little JS — deployed on Vercel.</div>
-</footer>
-
 </div><!-- /#page-servicehub -->
 
 
-<div class="page" id="page-setrum" data-title="Setrum — Nathan" hidden>
+<!-- ===========================================================
+     PAGE: Setrum
+     =========================================================== -->
+<div class="page" id="page-setrum" data-title="Setrum — Nathan Phan" hidden>
+  <a class="back" href="#projects"><svg class="ic ic-stroke"><use href="#i-back"/></svg>All projects</a>
 
-<header class="project-hero">
-  <div class="wrap">
-    <a class="back-link" href="#projects">← Back to projects</a>
+  <header class="cs-head">
     <h1>Setrum</h1>
-    <p class="project-tagline">
-      A home energy monitoring dashboard — track electricity usage by device
-      and estimate the bill before it arrives.
-    </p>
-    <dl class="project-meta">
-      <div class="meta-item">
-        <dt>role</dt>
-        <dd>Frontend Developer</dd>
-      </div>
-      <div class="meta-item">
-        <dt>type</dt>
-        <dd>Web dashboard</dd>
-      </div>
-      <div class="meta-item">
-        <dt>status</dt>
-        <dd>Finished</dd>
-      </div>
+    <p class="cs-tagline">A home energy monitoring dashboard: track electricity usage by device and estimate the bill before it arrives.</p>
+    <dl class="meta">
+      <div><dt>Role</dt><dd>Frontend Developer</dd></div>
+      <div><dt>Type</dt><dd>Web dashboard</dd></div>
+      <div><dt>Status</dt><dd>Finished</dd></div>
     </dl>
-  </div>
-</header>
-
-<section>
-  <div class="wrap">
-    <div class="detail-block">
-      <h2>Overview</h2>
-      <p>
-        Setrum turns raw electricity usage into something a household can
-        actually act on. The home screen shows usage as daily, monthly or
-        annual totals with a trend chart, alongside a live breakdown of what
-        each connected device — air conditioner, TV, PC, lamp, fridge, air
-        fryer — is drawing. From there it's a short step to estimating what
-        the next bill will look like, or catching a device that's about to
-        fail before it does.
-      </p>
+    <div class="cs-actions">
+      <a class="btn btn-ghost" href="https://github.com/NP3215/setrum" target="_blank" rel="noopener">View code on GitHub</a>
     </div>
-  </div>
-</section>
+  </header>
 
-<section>
-  <div class="wrap">
-    <div class="section-head">
-      <h2>Screenshots</h2>
-    </div>
-    <div class="shot-grid">
-      <figure class="shot wide">
-        <img src="../Pictures/SetrumDashboard.png" alt="Setrum login screen and dashboard with daily, monthly and annual usage views">
-        <figcaption>Login, then the dashboard — daily, monthly and annual usage, plus a live device list.</figcaption>
+  <section class="cs-section">
+    <h2>Overview</h2>
+    <p>Setrum turns raw electricity usage into something a household can actually act on. The home screen shows usage as daily, monthly or annual totals with a trend chart, alongside a live breakdown of what each connected device (air conditioner, TV, PC, lamp, fridge, air fryer) is drawing. From there it's a short step to estimating what the next bill will look like, or catching a device that's about to fail before it does.</p>
+  </section>
+
+  <section class="cs-section">
+    <h2>Screenshots</h2>
+    <div class="gallery one">
+      <figure class="shot">
+        <button class="shot-btn" type="button" aria-label="Enlarge screenshot"><img src="Pictures/SetrumDashboard.png" alt="Setrum login screen and dashboard with daily, monthly and annual usage views" loading="lazy" decoding="async"></button>
+        <figcaption>Login, then the dashboard: daily, monthly and annual usage, plus a live device list.</figcaption>
       </figure>
-      <figure class="shot wide">
-        <img src="../Pictures/SetrumBillNotifProfile.png" alt="Setrum bill estimation, notifications and profile screens">
-        <figcaption>Bill estimation, notifications for anomalies, and the profile / settings screen.</figcaption>
+      <figure class="shot">
+        <button class="shot-btn" type="button" aria-label="Enlarge screenshot"><img src="Pictures/SetrumBillNotifProfile.png" alt="Setrum bill estimation, notifications and profile screens" loading="lazy" decoding="async"></button>
+        <figcaption>Bill estimation, notifications for anomalies, and the profile and settings screen.</figcaption>
       </figure>
     </div>
-  </div>
-</section>
+  </section>
 
-<section>
-  <div class="wrap">
-    <div class="section-head">
-      <h2>What I built</h2>
-    </div>
-    <ul class="feature-list">
+  <section class="cs-section">
+    <h2>What I built</h2>
+    <ul class="bullets">
       <li>Usage dashboard with daily, monthly and annual views and a trend chart.</li>
       <li>Per-device list showing live draw or usage for the selected period.</li>
-      <li>Bill estimation screen — usage, rate per kWh, tax and stamp combined into a printable summary.</li>
+      <li>Bill estimation screen: usage, rate per kWh, tax and stamp combined into a printable summary.</li>
       <li>Notifications for a device that looks faulty or a detected power outage.</li>
       <li>Profile section for account details, password, language, notification preferences and connected meters.</li>
     </ul>
-  </div>
-</section>
+  </section>
 
-<section>
-  <div class="wrap">
-    <div class="section-head">
-      <h2>Stack</h2>
-    </div>
-    <div class="stack-chips">
-      <span class="chip">HTML</span>
-      <span class="chip">CSS</span>
-      <span class="chip">JavaScript</span>
-      <span class="chip">Git</span>
-      <span class="chip">No backend</span>
-    </div>
-    <div class="project-links" style="margin-top:28px;">
-      <a class="btn btn-outline" href="https://github.com/NP3215/setrum" target="_blank" rel="noopener">View code on GitHub</a>
-    </div>
-  </div>
-</section>
+  <section class="cs-section">
+    <h2>Stack</h2>
+    <ul class="chips"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>Git</li><li>No backend</li></ul>
+  </section>
 
-<div class="wrap">
   <div class="next-project">
-    <div>
-      <div class="label">Next project</div>
-      <div class="title">InstaTags</div>
-    </div>
-    <a class="btn btn-outline" href="#/instatags">View →</a>
+    <div><div class="label">Next project</div><div class="title">WhatsApp WeChat Messaging Bridge</div></div>
+    <a class="btn btn-ghost" href="#/chatbridge">View project</a>
   </div>
-</div>
-
-<footer>
-  <div class="wrap footer-note">© 2026 Nathan. Built with HTML, CSS and a little JS — deployed on Vercel.</div>
-</footer>
-
 </div><!-- /#page-setrum -->
 
+  </main>
+</div><!-- /.shell -->
+
+<!-- Screenshot lightbox -->
+<dialog class="lightbox" id="lightbox" aria-label="Screenshot">
+  <div class="lb-inner">
+    <button class="lb-close" type="button" aria-label="Close screenshot"><svg class="ic ic-stroke"><use href="#i-close"/></svg></button>
+    <img id="lb-img" src="" alt="">
+    <p class="lb-caption" id="lb-cap"></p>
+  </div>
+</dialog>
 
 <script>
 (function () {
-  var toggle = document.querySelector(".nav-toggle");
-  var links = document.querySelector(".nav-links");
-  if (toggle && links) {
-    toggle.addEventListener("click", function () {
-      var open = links.classList.toggle("open");
-      toggle.setAttribute("aria-expanded", String(open));
-    });
-    links.querySelectorAll("a").forEach(function (link) {
-      link.addEventListener("click", function () {
-        links.classList.remove("open");
-        toggle.setAttribute("aria-expanded", "false");
-      });
+  var root = document.documentElement;
+
+  /* ---------- Theme toggle ---------- */
+  var themeMeta = document.querySelector('meta[name="theme-color"]');
+  function applyTheme(t) {
+    root.setAttribute("data-theme", t);
+    if (themeMeta) themeMeta.setAttribute("content", t === "light" ? "#f3f5fa" : "#0f1420");
+    document.querySelectorAll(".theme-toggle").forEach(function (b) {
+      b.setAttribute("aria-label", t === "light" ? "Switch to dark theme" : "Switch to light theme");
     });
   }
-})();
+  applyTheme(root.getAttribute("data-theme"));
+  document.querySelectorAll(".theme-toggle").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var next = root.getAttribute("data-theme") === "light" ? "dark" : "light";
+      applyTheme(next);
+      try { localStorage.setItem("theme", next); } catch (e) {}
+    });
+  });
 
-(function () {
+  /* ---------- Mobile menu ---------- */
+  var menuBtn = document.querySelector(".menu-toggle");
+  var menu = document.getElementById("mobile-menu");
+  function closeMenu() {
+    if (!menu) return;
+    menu.hidden = true;
+    menuBtn.setAttribute("aria-expanded", "false");
+  }
+  if (menuBtn && menu) {
+    menuBtn.addEventListener("click", function () {
+      var open = menu.hidden;
+      menu.hidden = !open;
+      menuBtn.setAttribute("aria-expanded", String(open));
+    });
+    menu.querySelectorAll("a").forEach(function (a) { a.addEventListener("click", closeMenu); });
+  }
+
+  /* ---------- Active section highlight ---------- */
+  var railLinks = Array.prototype.slice.call(document.querySelectorAll(".rail-nav a"));
+  function setActive(id) {
+    railLinks.forEach(function (a) { a.classList.toggle("active", a.getAttribute("data-target") === id); });
+  }
+  var sectionIds = ["projects", "experience", "about", "skills", "contact"];
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) setActive(e.target.id); });
+    }, { rootMargin: "-30% 0px -60% 0px" });
+    sectionIds.forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) io.observe(el);
+    });
+  }
+
+  /* ---------- Hash router (single-file "pages") ---------- */
   var ROUTES = {
     "#/": "page-home",
     "#home": "page-home",
-    "#/instatags": "page-instatags",
     "#/chatbridge": "page-chatbridge",
+    "#/instatags": "page-instatags",
     "#/servicehub": "page-servicehub",
     "#/setrum": "page-setrum"
   };
@@ -936,19 +1191,16 @@ footer .wrap { display: flex; justify-content: space-between; align-items: flex-
 
     if (!pageId) {
       pageId = "page-home";
-      if (hash.length > 1 && hash.charAt(1) !== "/") {
-        anchor = hash.slice(1);
-      }
+      if (hash.length > 1 && hash.charAt(1) !== "/") anchor = hash.slice(1);
     }
 
-    pages.forEach(function (page) {
-      page.hidden = page.id !== pageId;
-    });
+    pages.forEach(function (p) { p.hidden = p.id !== pageId; });
 
     var current = document.getElementById(pageId);
-    if (current && current.dataset.title) {
-      document.title = current.dataset.title;
-    }
+    if (current && current.dataset.title) document.title = current.dataset.title;
+
+    if (pageId !== "page-home") setActive("projects");
+    else if (!anchor) setActive("");
 
     var target = anchor ? document.getElementById(anchor) : null;
     if (target) {
@@ -957,9 +1209,51 @@ footer .wrap { display: flex; justify-content: space-between; align-items: flex-
       window.scrollTo({ top: 0, behavior: "auto" });
     }
   }
-
   window.addEventListener("hashchange", function () { render(true); });
   render(false);
+
+  /* ---------- Screenshot lightbox ---------- */
+  var lb = document.getElementById("lightbox");
+  var lbImg = document.getElementById("lb-img");
+  var lbCap = document.getElementById("lb-cap");
+  if (lb && typeof lb.showModal === "function") {
+    document.querySelectorAll(".shot-btn").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var img = btn.querySelector("img");
+        var cap = btn.parentElement.querySelector("figcaption");
+        lbImg.src = img.currentSrc || img.src;
+        lbImg.alt = img.alt;
+        lbCap.textContent = cap ? cap.textContent : "";
+        lb.showModal();
+      });
+    });
+    lb.addEventListener("click", function (e) {
+      if (e.target === lb || e.target.closest(".lb-close")) lb.close();
+    });
+  }
+
+  /* ---------- Copy email ---------- */
+  document.querySelectorAll("[data-copy]").forEach(function (btn) {
+    var label = btn.textContent;
+    btn.addEventListener("click", function () {
+      var value = btn.getAttribute("data-copy");
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(value).then(function () {
+          btn.textContent = "Copied";
+          setTimeout(function () { btn.textContent = label; }, 1800);
+        }, function () { location.href = "mailto:" + value; });
+      } else {
+        location.href = "mailto:" + value;
+      }
+    });
+  });
+
+  /* ---------- Respect reduced motion for the SVG animation ---------- */
+  if (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    document.querySelectorAll("svg").forEach(function (s) {
+      if (typeof s.pauseAnimations === "function") s.pauseAnimations();
+    });
+  }
 })();
 </script>
 

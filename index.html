@@ -386,13 +386,17 @@ section{padding:60px 0}
       <li class="now">
         <div class="tl-h"><h3>Full Stack Engineer</h3><span class="dates">July 2026 – Present</span></div>
         <p class="co">PT. Batavia Satu<small>Part-time</small></p>
-        <p class="sum">Built a purchase-order management system end to end, plus a bridge that sends notifications to WhatsApp and WeChat.</p>
-        <ul class="chips"><li>C#</li><li>ASP.NET</li><li>React</li><li>WhatsApp API</li><li>WeChat API</li></ul>
+        <p class="sum">Built a purchase-order management system end to end and a WhatsApp/WeChat notification bridge, and now own the CRM package of a legacy-system migration to ASP.NET Core MVC.</p>
+        <ul class="chips"><li>C#</li><li>ASP.NET</li><li>ASP.NET Core MVC</li><li>VB.NET</li><li>React</li><li>Dapper</li><li>SQL Server</li><li>WhatsApp API</li><li>WeChat API</li></ul>
         <details open><summary>What I did</summary>
           <ul class="bul">
             <li>Built an enterprise purchase-order management web application end to end, across an ASP.NET/C# backend and a React front end.</li>
             <li>Implemented supplier and store-selection workflows, dynamic edit forms, and the underlying database repositories.</li>
             <li>Designed and built a messaging bridge connecting the internal system to WhatsApp and WeChat for automated, cross-platform notifications.</li>
+            <li>Own the CRM package of a legacy migration for a clinic network, moving VB.NET WebForms/DevExpress pages to ASP.NET Core MVC with Dapper and SQL Server: loyalty accounts, redemption orders, e-vouchers, service packages, SMS logs and the patient photo gallery.</li>
+            <li>Apply database transactions with rollback, audit trails and soft delete on write actions, and match PDF, Excel and CSV exports to the legacy system.</li>
+            <li>Analyze legacy VB.NET code to fix defects (for example, a refund log that wrote duplicate rows) and handle schema differences between environments.</li>
+            <li>Use Claude Code to speed up legacy code analysis, implementation and review, with builds and testing in Visual Studio.</li>
             <li>Worked across the stack, from backend services to front-end views, as part of a small engineering team.</li>
           </ul>
         </details>
@@ -433,8 +437,8 @@ section{padding:60px 0}
     <p class="sub">Each skill links to the project or job where I used it.</p>
     <div class="caps" id="caps"></div>
     <div class="tools">
-      <div><h3>Languages</h3><ul class="chips"><li>C#</li><li>JavaScript</li><li>Python</li><li>Java</li><li>HTML</li><li>CSS</li></ul></div>
-      <div><h3>Frameworks &amp; tools</h3><ul class="chips"><li>ASP.NET MVC</li><li>ASP.NET Web API</li><li>React</li><li>AngularJS</li><li>Flutter</li><li>Dapper ORM</li><li>LINQ</li><li>Microsoft SQL Server</li><li>MySQL</li><li>Postman</li><li>Facebook API</li><li>Git &amp; GitHub</li></ul></div>
+      <div><h3>Languages</h3><ul class="chips"><li>C#</li><li>VB.NET</li><li>Dart</li><li>JavaScript</li><li>Python</li><li>Java</li><li>HTML</li><li>CSS</li></ul></div>
+      <div><h3>Frameworks &amp; tools</h3><ul class="chips"><li>ASP.NET Core MVC</li><li>ASP.NET MVC</li><li>ASP.NET Web API</li><li>Razor</li><li>React</li><li>AngularJS</li><li>Flutter</li><li>Dapper ORM</li><li>LINQ</li><li>Microsoft SQL Server</li><li>T-SQL</li><li>MySQL</li><li>Postman</li><li>Microsoft Azure</li><li>Visual Studio</li><li>TFVC</li><li>Claude Code</li><li>Facebook API</li><li>Git &amp; GitHub</li></ul></div>
     </div>
   </div></section>
 </div>
@@ -455,6 +459,7 @@ section{padding:60px 0}
     </div>
     <p class="addr">nathanphan.nate@gmail.com</p>
     <ul class="channels">
+      <li><small>Phone</small><b>+62 822 9797 6868</b><div class="ch-act"><button type="button" data-phone>Copy number</button><a href="tel:+6282297976868">Call</a></div></li>
       <li><small>LINE ID</small><b>phannathan</b><div class="ch-act"><button type="button" data-line>Copy ID</button><a href="https://line.me/ti/p/~phannathan" target="_blank" rel="noopener">Add on LINE</a></div></li>
       <li><small>Instagram</small><b>@n4thanphan</b><div class="ch-act"><a href="https://www.instagram.com/n4thanphan" target="_blank" rel="noopener">Open profile</a></div></li>
     </ul>
@@ -534,7 +539,7 @@ const I={code:`<polyline points="8 6 2 12 8 18"/><polyline points="16 6 22 12 16
 const C=[
 [I.code,'Build features end to end','C# and ASP.NET services paired with React screens, from purchase-order workflows to dynamic edit forms.',[['Messaging bridge','#/chatbridge'],['Batavia Satu','#experience']]],
 [I.api,'Connect systems through APIs','WhatsApp, WeChat and Facebook API integrations over webhooks, with endpoints tested in Postman.',[['Messaging bridge','#/chatbridge']]],
-[I.db,'Work with data','SQL Server and MySQL, using Dapper ORM and LINQ for repositories of CRUD-heavy business entities.',[['Cellbox internship','#experience']]],
+[I.db,'Work with data','SQL Server and MySQL, using Dapper ORM and LINQ for CRUD-heavy business entities, plus transactions and audit trails in a legacy migration.',[['Cellbox internship','#experience'],['Batavia Satu','#experience']]],
 [I.ui,'Build small, usable interfaces','React, AngularJS, JavaScript, HTML and CSS, focused on screens people understand at first glance.',[['Setrum','#/setrum'],['InstaTags','#/instatags']]],
 [I.mob,'Ship on mobile and in the browser','Flutter for ServiceHub and Chrome extension APIs for InstaTags.',[['ServiceHub','#/servicehub'],['InstaTags','#/instatags']]],
 [I.biz,'Understand business processes','ERP systems, supply chain and business-process workflows, built with the team that uses them.',[['Batavia Satu','#experience']]]];
@@ -622,6 +627,8 @@ const copyMail=()=>{if(navigator.clipboard)navigator.clipboard.writeText(EMAIL).
 $$('[data-copy]').forEach(b=>b.onclick=copyMail);
 const copyLine=()=>{if(navigator.clipboard)navigator.clipboard.writeText(LINEID).then(()=>toast('LINE ID copied'),()=>toast('LINE ID: '+LINEID));else toast('LINE ID: '+LINEID)};
 $$('[data-line]').forEach(b=>b.onclick=copyLine);
+const PHONE='+6282297976868';const copyPhone=()=>{if(navigator.clipboard)navigator.clipboard.writeText(PHONE).then(()=>toast('Phone number copied'),()=>toast('Phone: '+PHONE));else toast('Phone: '+PHONE)};
+$$('[data-phone]').forEach(b=>b.onclick=copyPhone);
 
 /* lightbox with previous / next */
 const lb=$('#lb');let gal=[],gi=0;

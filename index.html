@@ -351,7 +351,7 @@ section{padding:60px 0}
       <div class="acts2 rise" style="--d:.4s"><a class="btn-pill" href="#work">See projects</a><a class="btn-pill btn-ghost" href="Nathan_Phan_CV.pdf" download>Download CV</a></div>
       <div class="glance rise" style="--d:.5s">
         <a class="gl" href="#experience"><small>Working now</small><b>Full Stack Engineer at PT. Batavia Satu</b></a>
-        <a class="gl" href="#work"><small>Built</small><b>4 projects, 1 with a live demo</b></a>
+        <a class="gl" href="#work"><small>Built</small><b>4 projects, 2 with live demos</b></a>
         <a class="gl" href="#about"><small>Studying</small><b>Computer Science at BINUS</b></a>
       </div>
     </div>
@@ -400,7 +400,6 @@ section{padding:60px 0}
             <li>Worked across the stack, from backend services to front-end views, as part of a small engineering team.</li>
           </ul>
         </details>
-        <a class="textlink" href="#/chatbridge">See the messaging bridge project</a>
       </li>
       <li>
         <div class="tl-h"><h3>Full Stack Engineer</h3><span class="dates">July 2025 – August 2025</span></div>
@@ -525,14 +524,14 @@ const P=[
  shots:[['ServiceHubSignup.png','Sign-up screen.'],['ServiceHubLogin.png','Login screen (email and password sign-in).'],['ServiceHubExplore.png','Explore: workshops with ratings and services.'],['ServiceHubBookingDate.png','Choose a service type and a date.'],['ServiceHubBookingSlot.png','Pick an open time slot; taken slots are hidden.'],['ServiceHubProfile.png','Profile page with sign out.']],
  built:[`Email sign-up and login with Firebase Authentication; the profile is saved in TiDB.`,`Node.js/Express REST API with 11 endpoints; Firebase ID tokens are verified by middleware.`,`Workshop list with search by name and filters (all, nearest, popular).`,`Booking flow: service, date, then a time slot, with taken slots hidden and double bookings rejected by the backend.`,`Booking history with status, auto-refresh, and cancel or complete with confirmation dialogs.`,`Moved to my own Firebase project and TiDB cluster, kept secrets in .env files, and prepared deployment config (env-based keys, CORS, Firebase Hosting).`],
  stack:['Flutter / Dart','Node.js','Express','Firebase Authentication','TiDB (MySQL)','REST API','Git']},
-{id:'setrum',title:'Setrum',k:'Setrum',kind:'Web dashboard',plat:'web',img:'SetrumDashboard.png',tags:['HTML','CSS','JavaScript'],
- tag:`A home energy monitoring dashboard: track electricity usage by device and estimate the bill before it arrives.`,
- role:'Frontend Developer',type:'Web dashboard',code:gh+'setrum',
- flow:[['Devices','Air conditioner, TV, PC, lamp, fridge and more.'],['Usage','Daily, monthly and annual totals with a trend chart.'],['Bill estimate','Usage, rate per kWh, tax and stamp in one printable summary.'],['Alerts','Notifications for a device that looks faulty or a power outage.']],
- over:[`Setrum turns raw electricity usage into something a household can actually act on. The home screen shows usage as daily, monthly or annual totals with a trend chart, alongside a live breakdown of what each connected device (air conditioner, TV, PC, lamp, fridge, air fryer) is drawing. From there it's a short step to estimating what the next bill will look like, or catching a device that's about to fail before it does.`],
- shots:[['SetrumDashboard.png','Login, then the dashboard: daily, monthly and annual usage, plus a live device list.'],['SetrumBillNotifProfile.png','Bill estimation, notifications for anomalies, and the profile and settings screen.']],
- built:[`Usage dashboard with daily, monthly and annual views and a trend chart.`,`Per-device list showing live draw or usage for the selected period.`,`Bill estimation screen: usage, rate per kWh, tax and stamp combined into a printable summary.`,`Notifications for a device that looks faulty or a detected power outage.`,`Profile section for account details, password, language, notification preferences and connected meters.`],
- stack:['HTML','CSS','JavaScript','Git','No backend']}
+{id:'setrum',title:'Setrum',k:'Setrum',kind:'Mobile app UI prototype',plat:'mobile',img:'SetrumHome.png',tags:['HTML','CSS','JavaScript'],
+ tag:`A home energy app concept: watch live power, see usage by hour, month and year, control devices and estimate the bill. Front end only, with simulated data.`,
+ role:'UI / Frontend Developer',type:'Mobile app UI (front end only)',live:'https://np3215.github.io/setrum/',code:gh+'setrum',
+ flow:[['Live power','A gauge and a live chart show what the home is drawing right now.'],['Usage','Hourly, daily and monthly charts you can scrub with a finger.'],['Devices','Search, switch on or off, and open a detail sheet for each device.'],['Bill and alerts','Estimate the bill, then review and dismiss alerts.']],
+ over:[`Setrum is a mobile app design for understanding household electricity. It started as a simple dashboard and was rebuilt as a phone-style app: bottom tab navigation, a live power gauge, touch-friendly charts, a device list with switches, a bill estimator and an alerts inbox.`,`It is a front-end prototype only. There is no backend and no real meter; the usage numbers are generated in the browser, and the tariff, tax and stamp values are sample figures rather than an official bill.`],
+ shots:[['SetrumHome.png','Home: usage for today, a load gauge and an hourly chart.'],['SetrumLive.png','Live power: the chart updates every second.'],['SetrumDevices.png','Insights and a device list with on/off switches.'],['SetrumBill.png','Bill estimation with a cost breakdown by device.'],['SetrumAlerts.png','Alerts: filter, expand and swipe to dismiss.'],['SetrumProfile.png','Profile: theme, monthly budget and notification settings.']],
+ built:[`Phone-style app shell with bottom tab navigation, animated transitions, and light and dark themes.`,`Home with a load gauge, a live power chart and hourly, daily and monthly usage charts drawn in SVG, with touch scrubbing.`,`Device list with search, sorting, on/off switches and a detail sheet for each device.`,`Bill estimation for any month or a projection, with a tariff choice, a breakdown, a cost split by device and a downloadable summary.`,`Alerts inbox with filters, swipe to dismiss with undo, and a check-again action.`,`Profile with an editable name, a monthly budget, notification preferences and support for adding more properties.`],
+ stack:['HTML','CSS','JavaScript','SVG charts','Git','No backend']}
 ];
 const ic=p=>`<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
 const I={code:`<polyline points="8 6 2 12 8 18"/><polyline points="16 6 22 12 16 18"/>`,db:`<ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/>`,ui:`<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 9v11"/>`,api:`<path d="M9 2v6M15 2v6M7 8h10v3a5 5 0 0 1-10 0V8zM12 16v6"/>`,biz:`<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/>`,mob:`<rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/>`};

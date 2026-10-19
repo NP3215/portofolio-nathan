@@ -351,7 +351,7 @@ section{padding:60px 0}
       <div class="acts2 rise" style="--d:.4s"><a class="btn-pill" href="#work">See projects</a><a class="btn-pill btn-ghost" href="Nathan_Phan_CV.pdf" download>Download CV</a></div>
       <div class="glance rise" style="--d:.5s">
         <a class="gl" href="#experience"><small>Working now</small><b>Full Stack Engineer at PT. Batavia Satu</b></a>
-        <a class="gl" href="#work"><small>Built</small><b>4 projects, 2 with live demos</b></a>
+        <a class="gl" href="#work"><small>Built</small><b>4 projects, 1 with a live demo</b></a>
         <a class="gl" href="#about"><small>Studying</small><b>Computer Science at BINUS</b></a>
       </div>
     </div>
@@ -438,7 +438,7 @@ section{padding:60px 0}
     <div class="caps" id="caps"></div>
     <div class="tools">
       <div><h3>Languages</h3><ul class="chips"><li>C#</li><li>VB.NET</li><li>Dart</li><li>JavaScript</li><li>Python</li><li>Java</li><li>HTML</li><li>CSS</li></ul></div>
-      <div><h3>Frameworks &amp; tools</h3><ul class="chips"><li>ASP.NET Core MVC</li><li>ASP.NET MVC</li><li>ASP.NET Web API</li><li>Razor</li><li>React</li><li>AngularJS</li><li>Flutter</li><li>Dapper ORM</li><li>LINQ</li><li>Microsoft SQL Server</li><li>T-SQL</li><li>MySQL</li><li>Postman</li><li>Microsoft Azure</li><li>Visual Studio</li><li>TFVC</li><li>Claude Code</li><li>Facebook API</li><li>Git &amp; GitHub</li></ul></div>
+      <div><h3>Frameworks &amp; tools</h3><ul class="chips"><li>ASP.NET Core MVC</li><li>ASP.NET MVC</li><li>ASP.NET Web API</li><li>Razor</li><li>React</li><li>AngularJS</li><li>Flutter</li><li>Dapper ORM</li><li>LINQ</li><li>Microsoft SQL Server</li><li>T-SQL</li><li>MySQL / TiDB</li><li>Node.js</li><li>Express</li><li>REST APIs</li><li>Firebase Authentication</li><li>Postman</li><li>Microsoft Azure</li><li>Visual Studio</li><li>TFVC</li><li>Claude Code</li><li>Facebook API</li><li>Git &amp; GitHub</li></ul></div>
     </div>
   </div></section>
 </div>
@@ -459,7 +459,7 @@ section{padding:60px 0}
     </div>
     <p class="addr">nathanphan.nate@gmail.com</p>
     <ul class="channels">
-      <li><small>Phone</small><b>+62 822 9797 6868</b><div class="ch-act"><button type="button" data-phone>Copy number</button><a href="tel:+6282297976868">Call</a></div></li>
+      <li><small>Phone</small><b>+62 822 9797 6868</b><div class="ch-act"><button type="button" data-phone>Copy number</button></div></li>
       <li><small>LINE ID</small><b>phannathan</b><div class="ch-act"><button type="button" data-line>Copy ID</button><a href="https://line.me/ti/p/~phannathan" target="_blank" rel="noopener">Add on LINE</a></div></li>
       <li><small>Instagram</small><b>@n4thanphan</b><div class="ch-act"><a href="https://www.instagram.com/n4thanphan" target="_blank" rel="noopener">Open profile</a></div></li>
     </ul>
@@ -508,23 +508,23 @@ const P=[
  shots:[['ChatBridgeInbox.png','Chat list: WhatsApp and WeChat conversations side by side, each labelled by source.'],['ChatBridgeConversation.png','An open conversation, with per-message delete and file attachments.']],
  built:[`Unified inbox that merges WhatsApp and WeChat conversations, clearly labelled by source.`,`Per-conversation view with timestamps, inline contact renaming, and per-message delete.`,`File and image attachments sent the same way regardless of which platform the chat is on.`,`Built for support teams who'd otherwise need two separate tools open at once.`],
  stack:['React','JavaScript','ASP.NET Core','ASP.NET Web API','C#','REST APIs','Webhook integration','Microsoft Azure','WeChat API','WhatsApp API','Git']},
-{id:'instatags',title:'InstaTags',k:'InstaTags',kind:'Chrome extension and web app',plat:'web',img:'IntaTagsMain.png',tags:['JavaScript','Chrome Extension APIs','Vercel'],
+{id:'instatags',title:'InstaTags',k:'InstaTags',kind:'Chrome extension and web app',plat:'web',img:'IntaTagsMain.png',tags:['JavaScript','Chrome Extension APIs','CLIP'],
  tag:`A Chrome extension and web app that turns a photo into ready-to-use Instagram hashtags, so posting takes less time and less guessing.`,
- role:'Developer',type:'Chrome extension + web app',live:'https://tagsout.vercel.app',code:gh+'ChromeExtension',
- flow:[['Photo','Pick a photo in the Instagram post flow, or drop one into the web app.'],['Several models','Each lightweight model reads a different signal: subject, style, colour, mood.'],['Merged tags','The findings are combined into one set of relevant hashtags.'],['Copy','One click puts the tags into your caption.']],
- over:[`InstaTags exists to solve one small, repetitive problem: coming up with a good set of hashtags every time you post. Instead of hand-picking tags or copying a generic list, InstaTags looks at the photo itself. Several lightweight AI models each analyze a different signal in the image (subject, style, colour, mood) and their findings are combined into one set of relevant tags.`,`It's built two ways: as a Chrome extension that plugs directly into the Instagram posting flow, and as a standalone web app for anyone who just wants to drop in an image and copy the results.`],
+ role:'Developer',type:'Chrome extension + web app',code:gh+'extensionHashtag',
+ flow:[['Photo','Pick a photo in the Instagram post flow, or drop one into the web app.'],['CLIP model','The photo and a hashtag vocabulary are compared in the same embedding space.'],['Ranked tags','The hashtags that best match the photo are ranked and returned.'],['Copy','One click puts the tags into your caption.']],
+ over:[`InstaTags exists to solve one small, repetitive problem: coming up with a good set of hashtags every time you post. Instead of hand-picking tags or copying a generic list, InstaTags looks at the photo itself. a CLIP image-text model compares the photo against a vocabulary of hashtags and returns the closest matches as one set of relevant tags.`,`It's built two ways: as a Chrome extension that plugs directly into the Instagram posting flow, and as a standalone web app for anyone who just wants to drop in an image and copy the results.`],
  shots:[['IntaTagsMain.png','InstaTags website hero: save time on tags, spend it on content.'],['LandingPageInstaTags.png','Landing page: the pitch in one line.'],['UploadPageInstaTags.png','Upload screen for the web app version.'],['demo1InstaTags.png','Preview of the web hashtag generator.'],['demo2InstaTags.png','Preview of the Chrome extension hashtag generator.']],
  steps:['Create a new post on Instagram and choose the photo or video.','Go through the usual editing steps until you reach the caption screen.','Open the InstaTags extension icon to launch the hashtag generator.','Let it analyze the image. This takes a few seconds.','Review the suggested hashtags.','Copy the tags into your caption and post.'],
- built:[`Chrome extension that reads the photo mid-upload and generates matching hashtags inline.`,`Companion web app for tagging an image without installing anything.`,`Multiple models analysing the same image from different angles, merged into one tag list.`,`One-click copy so tags go straight into the caption.`],
- stack:['JavaScript','Chrome Extension APIs','Image recognition models','Vercel','Git']},
-{id:'servicehub',title:'ServiceHub',k:'ServiceHub',kind:'Mobile app',plat:'mobile',img:'ServiceHubExplore.png',tags:['Flutter','Dart','Mobile app'],
- tag:`A mobile app for finding and booking a car workshop: browse nearby options, then book a service in a few taps.`,
- role:'Mobile Developer',type:'Mobile app',code:gh+'ServiceHub',
- flow:[['Explore','Browse nearby and popular workshops, with ratings.'],['Service','Pick what needs doing, like an oil change.'],['Date and slot','Choose a day from the calendar, then an open time slot.'],['Confirm','Add a note for the technician and confirm the booking.']],
- over:[`Finding a trustworthy car workshop usually means asking around or scrolling through reviews on a maps app with no idea what's actually available. ServiceHub puts that in one place: nearby workshops with ratings and specialties up front, and a booking flow that takes you from "I need an oil change" to a confirmed time slot without leaving the app.`,`The booking flow is the core of it. Pick what you need done, pick a date from the calendar, pick an open time slot, add a note for the technician if something specific needs attention, and confirm.`],
- shots:[['ServiceHubSignup.png','Sign-up screen.'],['ServiceHubLogin.png','Login, with Google and Apple options.'],['ServiceHubExplore.png','Explore: nearby and popular workshops, with ratings.'],['ServiceHubBookingDate.png','Choose a service type and a date.'],['ServiceHubBookingSlot.png','Pick a time slot and add notes for the technician.'],['ServiceHubProfile.png','Profile: vehicle data, saved addresses, payment methods.']],
- built:[`Sign-up and login flow, including Google and Apple sign-in.`,`Workshop discovery with search, filters (nearest, most popular) and ratings.`,`A three-step booking flow: service type, date, then time slot.`,`Optional notes field so a customer can flag something specific before the appointment.`,`Profile screen for vehicle data, saved addresses, payment methods and account settings.`],
- stack:['Flutter / Dart','Database','Git']},
+ built:[`Chrome extension that reads the photo mid-upload and generates matching hashtags inline.`,`Companion web app for tagging an image without installing anything.`,`Hashtags ranked by how closely each one matches the photo, using a CLIP image-text model.`,`One-click copy so tags go straight into the caption.`],
+ stack:['JavaScript','Chrome Extension APIs','Python','FastAPI','CLIP image-text model','Docker','Git']},
+{id:'servicehub',title:'ServiceHub',k:'ServiceHub',kind:'Mobile app with a Node.js API',plat:'mobile',img:'ServiceHubExplore.png',tags:['Flutter','Node.js','Firebase Auth','TiDB'],
+ tag:`A full-stack app for finding workshops and booking a vehicle service: a Flutter client, a Node.js REST API and a TiDB database.`,
+ role:'Developer',type:'Full-stack mobile app',code:gh+'service-hub',
+ flow:[['Explore','Browse workshops, search by name, filter by nearest or popular.'],['Service','Pick what needs doing, like an oil change.'],['Date and slot','Choose a day, then one of the open time slots.'],['Confirm','Confirm the booking and follow its status in your history.']],
+ over:[`ServiceHub started as a university group assignment, and I developed it further into a full-stack app. A Flutter client talks to a Node.js/Express REST API (11 endpoints) that stores users, workshops, services and bookings in TiDB Cloud, a MySQL-compatible database. Sign-in uses Firebase Authentication with email and password, and the backend verifies the Firebase token on protected requests.`,`The booking flow is the core: choose a service, a date and one of six daily time slots. Slots that are already taken are hidden and the backend rejects double bookings. Bookings show up in a history with Pending, Confirmed, Completed and Cancelled states.`,`Some parts are still prototype-level: distance is measured from a fixed point rather than GPS, booking confirmation is simulated, the profile menu items are display only, and the app is not deployed.`],
+ shots:[['ServiceHubSignup.png','Sign-up screen.'],['ServiceHubLogin.png','Login screen (email and password sign-in).'],['ServiceHubExplore.png','Explore: workshops with ratings and services.'],['ServiceHubBookingDate.png','Choose a service type and a date.'],['ServiceHubBookingSlot.png','Pick an open time slot; taken slots are hidden.'],['ServiceHubProfile.png','Profile page with sign out.']],
+ built:[`Email sign-up and login with Firebase Authentication; the profile is saved in TiDB.`,`Node.js/Express REST API with 11 endpoints; Firebase ID tokens are verified by middleware.`,`Workshop list with search by name and filters (all, nearest, popular).`,`Booking flow: service, date, then a time slot, with taken slots hidden and double bookings rejected by the backend.`,`Booking history with status, auto-refresh, and cancel or complete with confirmation dialogs.`,`Moved to my own Firebase project and TiDB cluster, kept secrets in .env files, and prepared deployment config (env-based keys, CORS, Firebase Hosting).`],
+ stack:['Flutter / Dart','Node.js','Express','Firebase Authentication','TiDB (MySQL)','REST API','Git']},
 {id:'setrum',title:'Setrum',k:'Setrum',kind:'Web dashboard',plat:'web',img:'SetrumDashboard.png',tags:['HTML','CSS','JavaScript'],
  tag:`A home energy monitoring dashboard: track electricity usage by device and estimate the bill before it arrives.`,
  role:'Frontend Developer',type:'Web dashboard',code:gh+'setrum',
@@ -539,9 +539,9 @@ const I={code:`<polyline points="8 6 2 12 8 18"/><polyline points="16 6 22 12 16
 const C=[
 [I.code,'Build features end to end','C# and ASP.NET services paired with React screens, from purchase-order workflows to dynamic edit forms.',[['Messaging bridge','#/chatbridge'],['Batavia Satu','#experience']]],
 [I.api,'Connect systems through APIs','WhatsApp, WeChat and Facebook API integrations over webhooks, with endpoints tested in Postman.',[['Messaging bridge','#/chatbridge']]],
-[I.db,'Work with data','SQL Server and MySQL, using Dapper ORM and LINQ for CRUD-heavy business entities, plus transactions and audit trails in a legacy migration.',[['Cellbox internship','#experience'],['Batavia Satu','#experience']]],
+[I.db,'Work with data','SQL Server, MySQL and TiDB, using Dapper ORM and LINQ for CRUD-heavy business entities, plus transactions and audit trails in a legacy migration.',[['Cellbox internship','#experience'],['Batavia Satu','#experience']]],
 [I.ui,'Build small, usable interfaces','React, AngularJS, JavaScript, HTML and CSS, focused on screens people understand at first glance.',[['Setrum','#/setrum'],['InstaTags','#/instatags']]],
-[I.mob,'Ship on mobile and in the browser','Flutter for ServiceHub and Chrome extension APIs for InstaTags.',[['ServiceHub','#/servicehub'],['InstaTags','#/instatags']]],
+[I.mob,'Ship on mobile and in the browser','Flutter with a Node.js API for ServiceHub, and Chrome extension APIs for InstaTags.',[['ServiceHub','#/servicehub'],['InstaTags','#/instatags']]],
 [I.biz,'Understand business processes','ERP systems, supply chain and business-process workflows, built with the team that uses them.',[['Batavia Satu','#experience']]]];
 
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches,fine=matchMedia('(hover:hover)').matches;
@@ -569,7 +569,7 @@ act(-1);
 $$('.dio .cb').forEach(a=>{const i=+a.dataset.i;a.onmouseenter=a.onfocus=()=>act(i);a.onclick=e=>{if(!fine&&cur!==i){e.preventDefault();act(i)}}});
 
 /* logic board */
-const K=[['C#','c#'],['ASP.NET','asp.net'],['React','react'],['JavaScript','javascript'],['Flutter','flutter'],['HTML / CSS','html'],['Webhooks','webhook'],['Azure','azure'],['Chrome APIs','chrome'],['Git','git']];
+const K=[['C#','c#'],['ASP.NET','asp.net'],['React','react'],['JavaScript','javascript'],['Flutter','flutter'],['HTML / CSS','html'],['Node.js','node'],['TiDB / MySQL','tidb'],['Webhooks','webhook'],['Azure','azure'],['Chrome APIs','chrome'],['Git','git']];
 const hits=k=>P.map((p,i)=>[...p.tags,...p.stack].join(' ').toLowerCase().includes(k)?i:-1).filter(i=>i>-1);
 $('#inputs').innerHTML=K.map((k,i)=>`<button class="sk" type="button" data-k="${i}">${k[0]}</button>`).join('');
 $('#outputs').innerHTML=P.map(p=>`<a class="lamp" href="#/${p.id}"><i></i>${p.k}</a>`).join('');
